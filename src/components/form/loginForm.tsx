@@ -1,7 +1,7 @@
 
 import { Input } from "../formItems/input"
 import { Button } from "../formItems/button"
-import { useAuth } from "@/authContext"
+import { useAuth } from "@/server/authContext"
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ export function LoginForm() {
 
     const handleLogin = async () => {
         // Simuler un appel API (remplace ceci par un vrai appel)
-        if (email === "test@example.com" && password === "password") {
+        if (email === "test" && password === "password") {
             const fakeToken = "123456789";
             login(fakeToken);
             navigate("/mainPage");
