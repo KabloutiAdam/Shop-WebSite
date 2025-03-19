@@ -14,7 +14,7 @@ import MainPage from "../main/mainPage"
 
 function LoginPage() {
     const navigate = useNavigate();
-    let [tabSelected, setTabSelected] = useState("register");
+    let [tabSelected, setTabSelected] = useState("login");
 
     function switchTab(tabClicked: string) {
 

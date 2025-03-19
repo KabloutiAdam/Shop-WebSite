@@ -1,6 +1,7 @@
 
 import { Input } from "../formItems/input"
 import { Button } from "../formItems/button"
+import useAuth from "@/server/auth"
 
 
 export function LoginForm() {
@@ -8,7 +9,7 @@ export function LoginForm() {
     return (
         <>
 
-            <form className="grid w-full gap-8 mt-4">
+            <div className="grid w-full gap-8 mt-4">
                 <div className="grid w-full max-w-sm items-center gap-1.5">
                     <label htmlFor="email" className="justify-self-start ml-2">Email</label>
                     <Input id="email" type="email" />
@@ -18,8 +19,8 @@ export function LoginForm() {
                     <Input id="password" type="password" />
                 </div>
 
-                <Button type="submit" className="hover:cursor-pointer">Valider</Button>
-            </form>
+                <Button className="hover:cursor-pointer" onClick={() => useAuth()}>Valider</Button>
+            </div>
 
 
 

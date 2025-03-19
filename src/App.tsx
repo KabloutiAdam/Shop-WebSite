@@ -9,8 +9,9 @@ import MainPage from "./pages/main/mainPage"
 function App() {
 
   const [token, setToken] = useState();
+  const [userConnected, setUserConnected] = useState(false);
 
-  if (true) {
+  if (!userConnected) {
     return (
       <BrowserRouter>
         <Routes>

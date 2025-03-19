@@ -1,6 +1,7 @@
 
 import { Input } from "../formItems/input"
 import { Button } from "../formItems/button"
+import useAuth from "@/server/auth"
 
 
 function RegisterForm() {
@@ -29,7 +30,7 @@ function RegisterForm() {
                     <Input id="password" type="password" />
                 </div>
 
-                <Button className="hover:cursor-pointer">Valider</Button>
+                <Button className="hover:cursor-pointer" onClick={() => useAuth()}>Valider</Button>
             </div>
 
         </>
