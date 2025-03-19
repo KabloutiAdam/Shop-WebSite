@@ -8,7 +8,7 @@ export function LoginForm() {
     return (
         <>
 
-            <div className="grid w-full gap-8 mt-4">
+            <form className="grid w-full gap-8 mt-4">
                 <div className="grid w-full max-w-sm items-center gap-1.5">
                     <label htmlFor="email" className="justify-self-start ml-2">Email</label>
                     <Input id="email" type="email" />
@@ -18,8 +18,8 @@ export function LoginForm() {
                     <Input id="password" type="password" />
                 </div>
 
-                <Button className="hover:cursor-pointer">Valider</Button>
-            </div>
+                <Button type="submit" className="hover:cursor-pointer">Valider</Button>
+            </form>
 
 
 
