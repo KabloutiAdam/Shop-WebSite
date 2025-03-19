@@ -10,23 +10,30 @@ function App() {
 
   const [token, setToken] = useState();
 
-  if(true){
-    return <LoginPage />
-    
+  if (true) {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<LoginPage />} />
+        </Routes>
+      </BrowserRouter>
+    )
+
   }
 
   return (
 
     <>
-        <h1>Application</h1>
-            <BrowserRouter>
-                <Routes>
-                    <Route 
-                    path="/mainPage"
-                    element={<MainPage />}/>
-                        
-                </Routes>
-            </BrowserRouter>
+      <h1>Application</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/mainPage"
+            element={<MainPage />} />
+
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
