@@ -1,7 +1,6 @@
 
 import { Input } from "../formItems/input"
 import { Button } from "../formItems/button"
-import useAuth from "@/server/auth"
 
 
 function RegisterForm() {
@@ -27,10 +26,10 @@ function RegisterForm() {
                 </div>
                 <div className="grid w-full max-w-sm items-center gap-1.5">
                     <label htmlFor="email" className="justify-self-start ml-2">Confirmer mot de passe</label>
-                    <Input id="password" type="password" />
+                    <Input id="passwordConfirm" type="password" />
                 </div>
 
-                <Button className="hover:cursor-pointer" onClick={() => useAuth()}>Valider</Button>
+                <Button className="hover:cursor-pointer">Valider</Button>
             </div>
 
         </>

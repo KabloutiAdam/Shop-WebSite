@@ -1,42 +1,41 @@
 import React, { useState } from "react"
 
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import LoginPage from "./pages/login/loginPage"
 import MainPage from "./pages/main/mainPage"
+import { AuthProvider } from "./authContext";
+import { useAuth } from "./authContext";
 
 
 
 function App() {
 
-  const [token, setToken] = useState();
-  const [userConnected, setUserConnected] = useState(false);
 
-  if (!userConnected) {
-    return (
+
+  const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const { isUserConnected } = useAuth();
+    return isUserConnected ? <>{children}</> : <Navigate to="/login" />;
+  }
+
+  return (
+    <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<LoginPage />} />
+          <Route path="/mainPage" element={
+            <ProtectedRoute>
+              <MainPage />
+            </ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
-    )
+    </AuthProvider>
 
-  }
 
-  return (
-
-    <>
-      <h1>Application</h1>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/mainPage"
-            element={<MainPage />} />
-
-        </Routes>
-      </BrowserRouter>
-    </>
   )
+
+
+
 }
 
 export default App
