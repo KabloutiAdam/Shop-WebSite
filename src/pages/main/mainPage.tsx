@@ -1,26 +1,31 @@
 import React from "react";
-import { Button } from "@/components/formItems/button";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/server/authContext";
+
+import Header from "@/components/header/header";
 
 
 
+export default function MainPage() {
 
-export default function MainPage(){
+    
 
-    const { logout } = useAuth()
-    const navigate = useNavigate()
-
-    const handleLogout = async () => {
-        logout()
-        navigate("/login")
-    }
-
-    return(
+    return (
         <>
-            <p>Main Page</p>
+            <Header />
 
-          <Button className="hover:cursor-pointer" onClick={handleLogout}>Valider</Button>
+            <main className="mt-10 ">
+                
+                <div className="w-full h-full flex justify-center mb-15">
+                    <img className="w-180 " src="../../../images/homePageAdd.jpg" alt=""/>
+
+                </div>
+                <p>Main Page</p>
+
+                
+
+            </main>
+
+
+
         </>
     )
 }

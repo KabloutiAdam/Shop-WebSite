@@ -30,8 +30,8 @@ function App() {
   }, [isUserConnected, navigate])
 
   return (
-    
 
+    
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<LoginPage />} />
@@ -40,8 +40,9 @@ function App() {
             <MainPage />
           </ProtectedRoute>} />
       </Routes>
+   
 
- 
+
 
 
   )

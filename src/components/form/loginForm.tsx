@@ -37,7 +37,7 @@ export function LoginForm() {
                     <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
-                <Button className="hover:cursor-pointer" onClick={handleLogin}>Valider</Button>
+                <Button className="bg-black text-white hover:cursor-pointer" onClick={handleLogin}>Valider</Button>
             </div>
 
 
