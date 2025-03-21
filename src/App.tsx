@@ -5,6 +5,7 @@ import LoginPage from "./pages/login/loginPage"
 import MainPage from "./pages/main/mainPage"
 import { AuthProvider } from "./server/authContext";
 import { useAuth } from "./server/authContext";
+import ItemPage from "./pages/itemPage";
 
 
 
@@ -21,13 +22,10 @@ function App() {
   const { isUserConnected } = useAuth()
   const navigate = useNavigate()
   useEffect(() => {
-    if (isUserConnected) {
-      navigate('/mainPage')
-    }
-    else {
+    if (!isUserConnected) {
       navigate('/login')
     }
-  }, [isUserConnected, navigate])
+  }, [])
 
   return (
 
@@ -39,6 +37,8 @@ function App() {
           <ProtectedRoute>
             <MainPage />
           </ProtectedRoute>} />
+        
+        <Route path="/:category/:item" element={<ItemPage />} />
       </Routes>
    
 

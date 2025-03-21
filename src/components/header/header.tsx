@@ -20,7 +20,7 @@ export default function Header() {
 
     return (
         
-            <div className="w-full bg-white h-22 border shadow-md grid grid-cols-4 grid-rows-1 gap-4 p-4" >
+            <div className=" sticky top-0 w-full bg-white h-22 border shadow-md grid grid-cols-4 grid-rows-1 gap-4 p-4" >
                 <div className="flex items-center pl-12">
                     <img className="w h-full " src="../../../images/siteLogo.png" alt="" />
                     <h2 className=" text-orange-500 font-medium">ShopSuperCool</h2>
