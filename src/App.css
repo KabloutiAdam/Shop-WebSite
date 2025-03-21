@@ -1,11 +1,11 @@
 #root {
   padding: 0 !important;
   margin: 0 auto;
-  padding: 2rem;
+  height: 100vh;
   text-align: center;
 }
 
-html{
-  height: auto !important;
+html, body{
+  height: 100% !important;
 }
 

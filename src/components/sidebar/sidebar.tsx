@@ -13,7 +13,7 @@ export default function SideBar() {
 
 
     return (
-        <div className=" text-gray-800 mt-10 p-4 pt-0 h-full flex justify-start">
+        <div className=" text-gray-800 mt-10 p-4 pt-0 h-fit flex justify-start">
             <SideBarHeader />
 
             <SideBarContent>

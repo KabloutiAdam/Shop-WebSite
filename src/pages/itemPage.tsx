@@ -6,6 +6,7 @@ import { PRODUCTS } from "@/database/products";
 import ProductSection from "@/components/product/productSection";
 import ProductList from "@/components/product/productList";
 import ProductCard from "@/components/product/productCard";
+import Footer from "@/components/footer/footer";
 
 
 
@@ -20,7 +21,7 @@ const ItemPage: React.FC = () => {
     return (
         <>
             <Header />
-            <div className="grid grid-cols-[2fr_8fr_2fr] h-full">
+            <div className="grid grid-cols-[2fr_8fr_2fr] h-fit">
                 <SideBar />
                 <main className="mt-10">
                     <div className="w-full h-full  ">
@@ -45,11 +46,13 @@ const ItemPage: React.FC = () => {
 
                 </main>
 
-                <div className="bg-gray-800 text-white p-4">
+                <div className="bg-gray-800 h-auto text-white p-4">
 
                 </div>
 
             </div>
+
+            <Footer />
         </>
     );
 };

@@ -39,6 +39,8 @@ function App() {
           </ProtectedRoute>} />
         
         <Route path="/:category/:tag" element={<ItemPage />} />
+
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
    
 
