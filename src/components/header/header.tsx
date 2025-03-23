@@ -1,7 +1,7 @@
 
 import SearchBar from "../searchBar/searchBar";
 
-import { useAuth } from "@/server/authContext";
+import { useAuth } from "@/context/authContext";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../formItems/button";
 

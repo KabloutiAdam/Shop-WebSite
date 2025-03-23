@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react"
 import { BrowserRouter, Route, Routes, Navigate, useNavigate, useLocation } from "react-router-dom"
 import LoginPage from "./pages/login/loginPage"
 import MainPage from "./pages/main/mainPage"
-import { AuthProvider } from "./server/authContext";
-import { useAuth } from "./server/authContext";
+import { AuthProvider } from "./context/authContext";
+import { useAuth } from "./context/authContext";
 import ItemPage from "./pages/itemPage";
 import ItemDetailsPage from "./pages/itemDetailsPage";
 

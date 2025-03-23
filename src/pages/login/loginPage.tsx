@@ -6,7 +6,7 @@ import LoginForm from "@/components/form/loginForm"
 import RegisterForm from "@/components/form/registerForm"
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom"
 
-import { useAuth } from "@/server/authContext"
+import { useAuth } from "@/context/authContext"
 
 import '../../App.css'
 import MainPage from "../main/mainPage"

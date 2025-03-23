@@ -8,6 +8,18 @@ html, body, #root{
 
 @plugin "tailwindcss-animate";
 
+@keyframes shake {
+
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10x); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  
+}
+.animate-shake {
+  animation: shake 0.4s ease-in;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
