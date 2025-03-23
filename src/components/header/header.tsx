@@ -1,5 +1,5 @@
 
-import SearchBar from "./searchBar";
+import SearchBar from "../searchBar/searchBar";
 
 import { useAuth } from "@/server/authContext";
 import { useNavigate } from "react-router-dom";

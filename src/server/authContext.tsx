@@ -1,13 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-
-// Interface du contexte d'authentification
-interface AuthContextType {
-    token: string | null; // Un token string ou null
-    isUserConnected: boolean; // Est ce que l'utilisateur est connecté
-    login: (token: string) => void; // Fonction pour se login avec le token comme paramètre
-    logout: () => void; // Fonction pour se logout
-}
+import { AuthContextType } from "@/interfaces"
 
 
 

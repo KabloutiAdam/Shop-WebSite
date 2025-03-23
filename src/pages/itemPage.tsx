@@ -14,9 +14,11 @@ import Footer from "@/components/footer/footer";
 const ItemPage: React.FC = () => {
     const { category, tag } = useParams<{ category: string; tag: string }>();
     
-    
 
+    
     const productsList = PRODUCTS.items.filter(item => item.item === tag)
+    
+    
 
     return (
         <>
@@ -28,7 +30,7 @@ const ItemPage: React.FC = () => {
                         <ProductSection>
                             {/* Ajouter les filtres ici*/}
                             <div className="w-full h-40 border-b-1 border-gray-200">
-
+                                <p className="text-2xl text-left pl-12 font-bold text-gray-800">Catégorie {tag?.toUpperCase()}</p>
                             </div>
 
 

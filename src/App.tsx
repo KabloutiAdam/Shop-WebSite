@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 
-import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router-dom"
+import { BrowserRouter, Route, Routes, Navigate, useNavigate, useLocation } from "react-router-dom"
 import LoginPage from "./pages/login/loginPage"
 import MainPage from "./pages/main/mainPage"
 import { AuthProvider } from "./server/authContext";
 import { useAuth } from "./server/authContext";
 import ItemPage from "./pages/itemPage";
+import ItemDetailsPage from "./pages/itemDetailsPage";
 
 
 
@@ -18,18 +19,22 @@ function App() {
     return isUserConnected ? <>{children}</> : <Navigate to="/login" />;
   }
 
+  function ScrollToTop() {
+    const { pathname } = useLocation();
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
 
-  const { isUserConnected } = useAuth()
-  const navigate = useNavigate()
-  useEffect(() => {
-    if (!isUserConnected) {
-      navigate('/login')
-    }
-  }, [])
+    return null;
+  }
+
+
+
+ 
 
   return (
-
-    
+    <>
+      <ScrollToTop />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<LoginPage />} />
@@ -37,13 +42,20 @@ function App() {
           <ProtectedRoute>
             <MainPage />
           </ProtectedRoute>} />
-        
-        <Route path="/:category/:tag" element={<ItemPage />} />
+
+        <Route path="/:category/:tag" element={
+          <ProtectedRoute>
+            <ItemPage />
+          </ProtectedRoute>} />
+          
+        <Route path="/:category/:tag/:id" element={
+          <ProtectedRoute>
+            <ItemDetailsPage />
+          </ProtectedRoute>} />
 
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
-   
-
+    </>
 
 
 
