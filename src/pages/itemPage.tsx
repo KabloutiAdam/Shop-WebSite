@@ -1,24 +1,40 @@
 import Header from "@/components/header/header";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SideBar from "@/components/sidebar/sidebar";
-import { PRODUCTS } from "@/database/products";
+import axios from "axios"
 import ProductSection from "@/components/product/productSection";
 import ProductList from "@/components/product/productList";
 import ProductCard from "@/components/product/productCard";
 import Footer from "@/components/footer/footer";
+import { productInterface } from "@/interfaces";
+
 
 
 
 
 const ItemPage: React.FC = () => {
     const { category, tag } = useParams<{ category: string; tag: string }>();
-    
 
-    
-    const productsList = PRODUCTS.items.filter(item => item.item === tag)
-    
-    
+
+
+    const [productsList, setProductsList] = useState<productInterface[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/products")
+            .then(res => {
+                const allProducts = res.data;
+                const filtered = tag
+                    ? allProducts.filter((product: any) => product.item_name === tag)
+                    : allProducts.filter((product: any) => product.category_name === category);
+                setProductsList(filtered);
+            })
+            .catch(err => console.error("Erreur chargement produits :", err))
+            .finally(() => setLoading(false));
+    }, [tag]);
+
+
 
     return (
         <>
@@ -36,9 +52,9 @@ const ItemPage: React.FC = () => {
 
 
                             <ProductList>
-                        
-                                {productsList.map(product  => (
-                                    <ProductCard product={product}/>
+
+                                {productsList.map(product => (
+                                    <ProductCard product={product} />
                                 ))}
                             </ProductList>
 

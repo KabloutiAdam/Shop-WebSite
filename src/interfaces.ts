@@ -12,11 +12,11 @@ export interface AuthContextType {
 export interface productInterface {
     id: number;
     name: string;
-    item: string;
-    link: string
-    category: string;
-    price: string;
-    brand: string;
+    item_name: string;
+    image_link: string
+    category_name: string;
+    price: number;
+    brand_name: string;
     description: string;
 }
 

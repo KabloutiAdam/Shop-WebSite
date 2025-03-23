@@ -47,6 +47,11 @@ function App() {
           <ProtectedRoute>
             <ItemPage />
           </ProtectedRoute>} />
+
+          <Route path="/:category" element={
+          <ProtectedRoute>
+            <ItemPage />
+          </ProtectedRoute>} />
           
         <Route path="/:category/:tag/:id" element={
           <ProtectedRoute>

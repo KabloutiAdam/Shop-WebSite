@@ -9,13 +9,13 @@ const DropdownResults: React.FC<dropdownResultInterface> = ({ filteredProducts, 
 
     //Vérifier si la catégorie est déjà dans la liste
     filteredProducts.forEach((product) => {
-        if (!groupedByCategory[product.category]) {
-            groupedByCategory[product.category] = [];
+        if (!groupedByCategory[product.category_name]) {
+            groupedByCategory[product.category_name] = [];
         }
 
         // Ajouter item s’il n’est pas déjà dans la liste
-        if (!groupedByCategory[product.category].includes(product.item)) {
-            groupedByCategory[product.category].push(product.item);
+        if (!groupedByCategory[product.category_name].includes(product.item_name)) {
+            groupedByCategory[product.category_name].push(product.item_name);
         }
     });
 

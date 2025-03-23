@@ -1,10 +1,10 @@
 
 import { Input } from "@/components/formItems/input"
-import { PRODUCTS } from "@/database/products";
+
 import { useEffect, useState } from "react"
 import { productInterface } from "@/interfaces"
 import DropdownResult from "./dropdownResult";
-
+import axios from "axios";
 export default function SearchBar() {
 
   const [query, setQuery] = useState("")
@@ -15,17 +15,25 @@ export default function SearchBar() {
 
 
   useEffect(() => {
-    if (query.length > 0) {
-      const filtered = PRODUCTS.items.filter((product) =>
-        product.name.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredProducts(filtered);
-      setShowDropdown(filtered.length > 0)
-    }
-    else {
-      setFilteredProducts([]);
-      setShowDropdown(false);
-    }
+    const fetchFilteredProducts = async () => {
+      if (query.length > 0) {
+        try {
+          const res = await axios.get("http://localhost:3001/products", {
+            params: { query },
+          });
+  
+          setFilteredProducts(res.data);
+          setShowDropdown(res.data.length > 0);
+        } catch (error) {
+          console.error("Erreur lors de la recherche :", error);
+        }
+      } else {
+        setFilteredProducts([]);
+        setShowDropdown(false);
+      }
+    };
+  
+    fetchFilteredProducts();
   }, [query])
 
 
