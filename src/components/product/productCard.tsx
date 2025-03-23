@@ -9,7 +9,7 @@ export default function ProductCard({ product }: { product: productInterface }) 
 
         
     return (
-        <Link to={`${product.id}`}>
+        <Link to={`/${product.category_name}/${product.item_name}/${product.id}`}>
             <div className="h-full mb-12 p-4 border-orange-300 border-r lg:last:border-r-0 xl:last:border-r-0 hover:cursor-pointer">
 
 
