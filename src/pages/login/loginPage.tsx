@@ -1,12 +1,12 @@
 
-import React from "react"
+import React, { use, useEffect } from "react"
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import LoginForm from "@/components/form/loginForm"
 import RegisterForm from "@/components/form/registerForm"
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom"
 
-
+import { useAuth } from "@/server/authContext"
 
 import '../../App.css'
 import MainPage from "../main/mainPage"
@@ -24,6 +24,19 @@ function LoginPage() {
 
         }
     }
+
+    const { isUserConnected } = useAuth();
+
+    useEffect(() => {
+        const path = window.location.pathname;
+        
+        if (path === '/login') {
+            if(isUserConnected){
+                navigate("/mainPage")
+            }
+        }  
+    },[])
+
 
     return (
         <>
