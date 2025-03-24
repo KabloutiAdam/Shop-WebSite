@@ -2,7 +2,7 @@
 
 import { productInterface } from "@/interfaces"
 
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 export default function ProductCard({ product }: { product: productInterface }) {
@@ -10,7 +10,7 @@ export default function ProductCard({ product }: { product: productInterface }) 
         
     return (
         <Link to={`/${product.category_name}/${product.item_name}/${product.id}`}>
-            <div className="h-full mb-12 p-4 border-orange-300 border-r lg:last:border-r-0 xl:last:border-r-0 hover:cursor-pointer">
+            <div className="h-full mb-12 p-4 border-orange-300 border-r hover:cursor-pointer">
 
 
 

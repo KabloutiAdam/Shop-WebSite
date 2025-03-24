@@ -1,5 +1,5 @@
 import Header from "@/components/header/header";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { useParams } from "react-router-dom";
 import SideBar from "@/components/sidebar/sidebar";
 import axios from "axios"
@@ -20,8 +20,11 @@ const ItemPage: React.FC = () => {
 
     const [productsList, setProductsList] = useState<productInterface[]>([]);
     const [loading, setLoading] = useState(true);
+    const [noResult, setNoResult] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
+        setNoResult(false)
         axios.get("http://localhost:3001/products")
             .then(res => {
                 const allProducts = res.data;
@@ -30,9 +33,12 @@ const ItemPage: React.FC = () => {
                     : allProducts.filter((product: any) => product.category_name === category);
                 setProductsList(filtered);
             })
-            .catch(err => console.error("Erreur chargement produits :", err))
+            .catch(err => {
+                console.error("Erreur chargement produits :", err)
+                setNoResult(true)
+            })
             .finally(() => setLoading(false));
-    }, [tag]);
+    }, [tag, category]);
 
 
 
@@ -53,9 +59,16 @@ const ItemPage: React.FC = () => {
 
                             <ProductList>
 
-                                {productsList.map(product => (
-                                    <ProductCard product={product} />
-                                ))}
+                                {
+                                    loading ?
+                                        <p>Loading</p>
+                                        : noResult ?
+                                        <p>no result</p> : 
+                                        productsList.map(product => (
+                                            <ProductCard product={product} />
+                                        )) 
+
+                                }
                             </ProductList>
 
                         </ProductSection>
