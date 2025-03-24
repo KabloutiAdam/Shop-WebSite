@@ -7,6 +7,7 @@ import { AuthProvider } from "./context/authContext";
 import { useAuth } from "./context/authContext";
 import ItemPage from "./pages/itemPage";
 import ItemDetailsPage from "./pages/itemDetailsPage";
+import SearchPage from "./pages/searchPage";
 
 
 
@@ -41,6 +42,10 @@ function App() {
         <Route path="/mainPage" element={
           <ProtectedRoute>
             <MainPage />
+          </ProtectedRoute>} />
+          <Route path="/search" element={
+          <ProtectedRoute>
+            <SearchPage />
           </ProtectedRoute>} />
 
         <Route path="/:category/:tag" element={

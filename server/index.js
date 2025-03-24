@@ -19,7 +19,9 @@ app.get("/products", (req, res) => {
     SELECT 
       p.id, p.name, p.image_link, p.price, p.description,
       i.name AS item_name,
+      i.traduction AS item_traduction,
       c.name AS category_name,
+      c.traduction AS category_traduction,
       b.name AS brand_name
     FROM t_product p
     JOIN t_items i ON p.item_id = i.id
@@ -31,7 +33,7 @@ app.get("/products", (req, res) => {
 
     if (searchQuery) {
         baseQuery += ` WHERE LOWER(p.name) LIKE ?`;
-        params.push(`%${searchQuery}%`);
+        params.push(`${searchQuery}%`);
     }
 
 
@@ -43,6 +45,8 @@ app.get("/products", (req, res) => {
         res.json(rows);
     });
 });
+
+
 
 // Démarrer le serveur
 const PORT = 3001;

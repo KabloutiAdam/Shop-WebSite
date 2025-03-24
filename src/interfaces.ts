@@ -13,8 +13,10 @@ export interface productInterface {
     id: number;
     name: string;
     item_name: string;
+    item_traduction:string;
     image_link: string
     category_name: string;
+    category_traduction: string;
     price: number;
     brand_name: string;
     description: string;
@@ -27,6 +29,7 @@ export interface categoryInterface {
 //Interface résultat recherche item filtré
 export interface dropdownResultInterface {
     filteredProducts: productInterface[]; // Tableau de produits filtrés
-    onSelect: (product: productInterface) => void; // Fonction de sélection
+    showDropdown: boolean;
+    onSelect: () => void; // Fonction de sélection
 }
 

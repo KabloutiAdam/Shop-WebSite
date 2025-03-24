@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { productInterface } from "@/interfaces"
 import DropdownResult from "./dropdownResult";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 export default function SearchBar() {
 
   const [query, setQuery] = useState("")
@@ -35,7 +36,15 @@ export default function SearchBar() {
   
     fetchFilteredProducts();
   }, [query])
+  
+  const navigate = useNavigate();
+  const search = async () => {
+    if (query.length > 0) {
+      setShowDropdown(false);
+      navigate(`/search?query=${query}`);
 
+    }
+};
 
   return (
     <>
@@ -47,11 +56,20 @@ export default function SearchBar() {
           value={query}
           type="search"
           placeholder="Rechercher un produit"
-          className="w-full border-0 h-8 font-semibold" />
+          className="w-full border-0 h-8 font-semibold"
+          onKeyDown={
+            (e) => {
+                if (e.key === "Enter") {
+                    (search())
+                }
+            }
+        } />
+          
       </div>
 
       {showDropdown && (<DropdownResult
         filteredProducts={filteredProducts}
+        showDropdown={showDropdown}
         onSelect={() => setShowDropdown(false)} 
         />)}
 
