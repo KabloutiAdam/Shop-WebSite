@@ -20,6 +20,7 @@ export interface productInterface {
     price: number;
     brand_name: string;
     description: string;
+    quantity: number;
 }
 
 export interface categoryInterface {

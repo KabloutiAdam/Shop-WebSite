@@ -33,7 +33,7 @@ app.get("/products", (req, res) => {
 
     if (searchQuery) {
         baseQuery += ` WHERE LOWER(p.name) LIKE ?`;
-        params.push(`${searchQuery}%`);
+        params.push(`%${searchQuery}%`);
     }
 
 
