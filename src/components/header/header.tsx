@@ -34,10 +34,11 @@ export default function Header() {
 
        
     }
+
     useEffect(() => {
 
         window.addEventListener('cartUpdated', updateCartCount)
-        
+
 
         return () => {
             window.removeEventListener('cartUpdated', updateCartCount)
@@ -70,10 +71,13 @@ export default function Header() {
             <div className="col-start-2 col-span-2 ">
                 <SearchBar />
             </div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-around items-center ">
                 <Button className="hover:cursor-pointer" onClick={handleLogout}>Se déconnecter</Button>
-
-                <p>{numberProductInCart > 0 ? numberProductInCart : ""}</p>
+                <div className="relative">
+                    <img src="../../../../images/logos/panier.png" alt="" />
+                    <p className="absolute left-0">{numberProductInCart > 0 ? numberProductInCart : ""}</p>
+                </div>
+               
             </div>
 
 
