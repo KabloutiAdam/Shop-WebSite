@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../formItems/button";
 import { useEffect, useState } from "react";
 import { productInterface } from "@/interfaces";
+import CartListDropdown from "./cartListDropdown";
 
 
 
@@ -14,28 +15,38 @@ export default function Header() {
     const { logout } = useAuth()
     const navigate = useNavigate()
     const [numberProductInCart, setNumberProductInCart] = useState(0)
+    const [showCartList, setShowCartList] = useState(false)
+
+
 
 
     const updateCartCount = () => {
-       
+
         var cartValue = get()
         if (cartValue != null) {
             var values = JSON.parse(cartValue)
             var totalCart = 0
             values.products.forEach((element: productInterface) => {
-                
+
 
                 totalCart += element.quantity
-                
+
             });
 
             setNumberProductInCart(totalCart)
         }
 
-       
+
     }
+    window.addEventListener('cartUpdated', updateCartCount)
+
+
+
+
 
     useEffect(() => {
+
+        updateCartCount()
 
         window.addEventListener('cartUpdated', updateCartCount)
 
@@ -44,7 +55,7 @@ export default function Header() {
             window.removeEventListener('cartUpdated', updateCartCount)
         }
 
-       
+
 
 
 
@@ -60,6 +71,11 @@ export default function Header() {
         navigate("/login")
     }
 
+    const ToggleCartDropdown = () => {
+        setShowCartList((prev) => !prev)
+
+    }
+
 
     return (
 
@@ -71,13 +87,30 @@ export default function Header() {
             <div className="col-start-2 col-span-2 ">
                 <SearchBar />
             </div>
-            <div className="flex justify-around items-center ">
-                <Button className="hover:cursor-pointer" onClick={handleLogout}>Se déconnecter</Button>
-                <div className="relative">
-                    <img src="../../../../images/logos/panier.png" alt="" />
-                    <p className="absolute left-0">{numberProductInCart > 0 ? numberProductInCart : ""}</p>
+            <div className="flex justify-around items-center">
+                <Button className="hover:cursor-pointer" onClick={handleLogout}>
+                    Se déconnecter
+                </Button>
+
+                <div
+                    className="relative w-16 h-13 group flex items-center justify-center rounded-2xl hover:cursor-pointer duration-200 "
+                    onClick={ToggleCartDropdown}
+                >
+                    <div className="bg-black group-hover:bg-amber-500 w-10 h-10" style={{ maskImage: `url(../../../../images/logos/panier.svg)`, WebkitMaskImage: `url(../../../../images/logos/panier.svg)` }} />
+
+
+
+
+
+                    {numberProductInCart > 0 && (
+                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
+                            {numberProductInCart}
+                        </span>
+                    )}
                 </div>
-               
+
+                {<CartListDropdown isDropdownOpen={showCartList} />}
+
             </div>
 
 
