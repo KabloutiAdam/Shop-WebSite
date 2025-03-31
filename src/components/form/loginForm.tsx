@@ -1,7 +1,8 @@
 
 import { Input } from "../formItems/input"
 import { Button } from "../formItems/button"
-import { useAuth } from "@/context/authContext"
+import { useAuth } from "../authProvider";
+
 import "../../index.css"
 
 import { useState } from "react";
@@ -9,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {
 
-    const { login } = useAuth();
+    const { handleLogin } = useAuth()
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -17,19 +18,23 @@ export function LoginForm() {
     const [shake, setShake] = useState(false);
 
 
-    const handleLogin = async () => {
+    const login = async () => {
         // Simuler un appel API
-        if (email === "test" && password === "password") {
-            const fakeToken = "123456789";
-            login(fakeToken);
+
+
+        const message = await handleLogin(email, password);
+        if (message == null) {
             navigate("/mainPage");
             setErrorMessage("");
-        } else {
-            
+        }else{
+
             setErrorMessage("Identifiants invalides");
             setShake(true);
             setTimeout(() => setShake(false), 500);
         }
+
+
+
     };
 
     return (
@@ -46,7 +51,7 @@ export function LoginForm() {
                         onKeyDown={
                             (e) => {
                                 if (e.key === "Enter") {
-                                    handleLogin()
+                                    login()
                                 }
                             }
                         }
@@ -63,7 +68,7 @@ export function LoginForm() {
                         onKeyDown={
                             (e) => {
                                 if (e.key === "Enter") {
-                                    handleLogin()
+                                    login()
                                 }
                             }
                         }
@@ -74,7 +79,7 @@ export function LoginForm() {
 
                 <Button
                     className="bg-black text-white hover:cursor-pointer"
-                    onClick={handleLogin}>Valider</Button>
+                    onClick={login}>Valider</Button>
             </div>
 
 

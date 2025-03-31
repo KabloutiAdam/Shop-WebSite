@@ -4,8 +4,9 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import LoginPage from './pages/login/loginPage.tsx'
 import App from './App.tsx'
-import { AuthProvider, useAuth } from "@/context/authContext.tsx";
+
 import { useNavigate } from 'react-router-dom'
+import AuthProvider from './components/authProvider.tsx'
 
 
 

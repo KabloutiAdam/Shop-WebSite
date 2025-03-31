@@ -7,13 +7,20 @@ export interface AuthContextType {
     logout: () => void; // Fonction pour se logout
 }
 
+// Interface d'un utilisateur
+export type user = {
+    id: number;
+    login: string;
+    role: string;
+}
+
 
 // Interface des produits de la boutique
 export interface productInterface {
     id: number;
     name: string;
     item_name: string;
-    item_traduction:string;
+    item_traduction: string;
     image_link: string
     category_name: string;
     category_traduction: string;

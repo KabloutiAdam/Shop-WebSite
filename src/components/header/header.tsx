@@ -1,7 +1,6 @@
 
 import SearchBar from "../searchBar/searchBar";
-
-import { useAuth } from "@/context/authContext";
+import { useAuth } from "../authProvider";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../formItems/button";
 import { useEffect, useState } from "react";
@@ -12,7 +11,7 @@ import CartListDropdown from "./cartListDropdown";
 
 
 export default function Header() {
-    const { logout } = useAuth()
+    const { handleLogout } = useAuth()
     const navigate = useNavigate()
     const [numberProductInCart, setNumberProductInCart] = useState(0)
     const [showCartList, setShowCartList] = useState(false)
@@ -66,8 +65,8 @@ export default function Header() {
         return localStorage.getItem('cartList')
     }
 
-    const handleLogout = async () => {
-        logout()
+    const Logout = async () => {
+        handleLogout()
         navigate("/login")
     }
 
@@ -88,7 +87,7 @@ export default function Header() {
                 <SearchBar />
             </div>
             <div className="flex justify-around items-center">
-                <Button className="hover:cursor-pointer" onClick={handleLogout}>
+                <Button className="hover:cursor-pointer" onClick={Logout}>
                     Se déconnecter
                 </Button>
 

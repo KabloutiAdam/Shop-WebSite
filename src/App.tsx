@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from "react"
+import { useEffect } from "react"
 
-import { BrowserRouter, Route, Routes, Navigate, useNavigate, useLocation } from "react-router-dom"
+import { Route, Routes, Navigate, useLocation } from "react-router-dom"
 import LoginPage from "./pages/login/loginPage"
 import MainPage from "./pages/main/mainPage"
-import { AuthProvider } from "./context/authContext";
-import { useAuth } from "./context/authContext";
+
 import ItemPage from "./pages/itemPage";
 import ItemDetailsPage from "./pages/itemDetailsPage";
 import SearchPage from "./pages/searchPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { useAuth } from "./components/authProvider";
 
 
 
 function App() {
 
+  const { currentUser } = useAuth()
+  console.log(currentUser)
 
-
-  const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const { isUserConnected } = useAuth();
-    return isUserConnected ? <>{children}</> : <Navigate to="/login" />;
-  }
+  // const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  //   const { isUserConnected } = useAuth();
+  //   return isUserConnected ? <>{children}</> : <Navigate to="/login" />;
+  // }
 
   function ScrollToTop() {
     const { pathname } = useLocation();
@@ -31,7 +33,7 @@ function App() {
 
 
 
- 
+
 
   return (
     <>
@@ -40,30 +42,37 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<LoginPage />} />
         <Route path="/mainPage" element={
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={['admin', 'user']}>
             <MainPage />
           </ProtectedRoute>} />
-          <Route path="/search" element={
-          <ProtectedRoute>
+        <Route path="/search" element={
+          <ProtectedRoute allowedRoles={['admin', 'user']}>
             <SearchPage />
           </ProtectedRoute>} />
 
         <Route path="/:category/:tag" element={
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={['admin', 'user']}>
             <ItemPage />
           </ProtectedRoute>} />
 
-          <Route path="/:category" element={
-          <ProtectedRoute>
+        <Route path="/:category" element={
+          <ProtectedRoute allowedRoles={['admin', 'user']}>
             <ItemPage />
           </ProtectedRoute>} />
-          
+
         <Route path="/:category/:tag/:id" element={
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={['admin', 'user']}>
             <ItemDetailsPage />
           </ProtectedRoute>} />
 
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route
+          path="*"
+          element={
+            currentUser
+              ? <Navigate to="/mainPage" />
+              : <Navigate to="/login" />
+          }
+        />
       </Routes>
     </>
 
