@@ -7,15 +7,17 @@ import MainPage from "./pages/main/mainPage"
 import ItemPage from "./pages/itemPage";
 import ItemDetailsPage from "./pages/itemDetailsPage";
 import SearchPage from "./pages/searchPage";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/routesProtection/ProtectedRoute";
 import { useAuth } from "./components/authProvider";
+import DashboardMainPage from "./pages/back-office/dashboardMainPage";
+
 
 
 
 function App() {
 
   const { currentUser } = useAuth()
-  console.log(currentUser)
+
 
   // const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   //   const { isUserConnected } = useAuth();
@@ -66,6 +68,17 @@ function App() {
             <ItemDetailsPage />
           </ProtectedRoute>} />
 
+        <Route path="/admin-dashboard" element={
+          <ProtectedRoute allowedRoles={['admin']}>
+            <DashboardMainPage />
+          </ProtectedRoute>
+        }
+        
+        />
+
+
+
+        {/* Route par défaut lorsqu'un URL non définie est entré dans le navigateur */}
         <Route
           path="*"
           element={

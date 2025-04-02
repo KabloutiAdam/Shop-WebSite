@@ -16,7 +16,8 @@ export default function Header() {
     const [numberProductInCart, setNumberProductInCart] = useState(0)
     const [showCartList, setShowCartList] = useState(false)
 
-
+    const {currentUser} = useAuth()
+    
 
 
     const updateCartCount = () => {
@@ -90,6 +91,17 @@ export default function Header() {
                 <Button className="hover:cursor-pointer" onClick={Logout}>
                     Se déconnecter
                 </Button>
+                
+                { 
+                    currentUser ? 
+                    currentUser.role === 'admin' &&
+                    <Button className="hover:cursor-pointer" onClick={() => navigate("/admin-dashboard")}>
+                        Admin Dashboard
+                    </Button>
+                    :
+                    ""
+                }
+               
 
                 <div
                     className="relative w-16 h-13 group flex items-center justify-center rounded-2xl hover:cursor-pointer duration-200 "

@@ -15,7 +15,6 @@ export default function ProtectedRoute({ allowedRoles, children }: protectedRout
     const { currentUser, isUserConnected } = useAuth()
     const navigate = useNavigate()
 
-    console.log(currentUser)
     useEffect(() => {
         if (currentUser === undefined && !isUserConnected) {
             console.log("+3")

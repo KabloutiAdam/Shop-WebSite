@@ -27,7 +27,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     const [isUserConnected, setIsUserConnected] = useState<boolean>(!!authToken);
 
 
-    console.log(isUserConnected)
+    
 
     useEffect(() => {
         const storedUser = localStorage.getItem("authUser");
