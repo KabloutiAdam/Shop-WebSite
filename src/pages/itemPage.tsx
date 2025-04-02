@@ -47,7 +47,7 @@ const ItemPage: React.FC = () => {
             <Header />
             <div className="grid grid-cols-[2fr_8fr_2fr] h-fit">
                 <SideBar />
-                <main className="mt-10">
+                <main className="mt-10 mb-10">
                     <div className="w-full h-full  ">
                         <ProductSection>
                             {/* Ajouter les filtres ici*/}

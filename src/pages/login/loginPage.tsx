@@ -10,11 +10,13 @@ import { useAuth } from "@/components/authProvider"
 
 import '../../App.css'
 
+type LoginProps ={
+    defaultTab?: string;
+}
 
-
-function LoginPage() {
+export default function LoginPage({defaultTab}: LoginProps) {
     const navigate = useNavigate();
-    let [tabSelected, setTabSelected] = useState("login");
+    let [tabSelected, setTabSelected] = useState(defaultTab);
 
     function switchTab(tabClicked: string) {
 
@@ -80,4 +82,4 @@ function LoginPage() {
     )
 }
 
-export default LoginPage
+

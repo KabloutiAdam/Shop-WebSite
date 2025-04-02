@@ -39,8 +39,9 @@ function App() {
     <>
       <ScrollToTop />
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<LoginPage />} />
+        <Route path="/login" element={
+          currentUser ? <Navigate to="/mainPage" /> : <LoginPage defaultTab="login" />} />
+        <Route path="/register" element={<LoginPage defaultTab="register"  />} />
         <Route path="/mainPage" element={
           <ProtectedRoute allowedRoles={['admin', 'user']}>
             <MainPage />

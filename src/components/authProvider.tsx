@@ -3,6 +3,7 @@ import { user } from '@/interfaces';
 import {
     createContext,
     PropsWithChildren,
+    use,
     useContext,
     useEffect,
     useState,
@@ -12,7 +13,7 @@ type AuthContext = {
     authToken?: string | null;
     currentUser?: user | null;
     isUserConnected: boolean
-    handleLogin: (email:string, password:string) => Promise<"erreur" | null>;
+    handleLogin: (email: string, password: string) => Promise<"erreur" | null>;
     handleLogout: () => Promise<void>;
 };
 
@@ -23,30 +24,21 @@ type AuthProviderProps = PropsWithChildren;
 export default function AuthProvider({ children }: AuthProviderProps) {
     const [authToken, setAuthToken] = useState<string | null>();
     const [currentUser, setCurrentUser] = useState<user | null>();
+    const [isUserConnected, setIsUserConnected] = useState<boolean>(!!authToken);
 
-    const isUserConnected = !!authToken
+
     console.log(isUserConnected)
 
     useEffect(() => {
-        // async function fetchUser() {
-        //     try {
-        //         const response = await getUser();
-
-        //         const { authToken, user } = response[1];
-
-        //         setAuthToken(authToken);
-        //         setCurrentUser(user);
-                
-        //     } catch {
-        //         setAuthToken(null);
-        //         setCurrentUser(null);
-        //     }
-        // }
-
-        // fetchUser();
+        const storedUser = localStorage.getItem("authUser");
+        if (storedUser) {
+            const parsedUser = JSON.parse(storedUser);
+            setCurrentUser(parsedUser);
+            setIsUserConnected(true);
+        }
     }, []);
 
-    async function handleLogin(email:string, password:string) {
+    async function handleLogin(email: string, password: string) {
         try {
             const response = await login(email, password);
 
@@ -54,6 +46,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
             console.log(response)
             setAuthToken(authToken);
             setCurrentUser(user);
+            setIsUserConnected(true)
+            localStorage.setItem("authUser", JSON.stringify(user));
             localStorage.setItem('userToken', authToken)
             return null
 
@@ -70,6 +64,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
     async function handleLogout() {
         localStorage.removeItem("userToken");
+        localStorage.removeItem("authUser");
+        setIsUserConnected(false)
         setAuthToken(null);
         setCurrentUser(undefined);
     }
