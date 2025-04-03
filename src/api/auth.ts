@@ -1,4 +1,4 @@
-import { user } from "@/interfaces";
+
 
 
 
@@ -21,7 +21,7 @@ export async function login(email: string, password: string) {
   }
 
 
-
+// @ts-ignore
 function generateAuthToken() {
   return Math.random().toString(36).substring(2);
 }
