@@ -5,12 +5,12 @@ import { useEffect, useState } from "react"
 import { productInterface } from "@/interfaces"
 import DropdownResult from "./dropdownResult";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function SearchBar() {
 
   const [query, setQuery] = useState("")
   const [filteredProducts, setFilteredProducts] = useState<productInterface[]>([]);
-  const [filterdCategory, setFilteredCategory] = useState("")
+ 
   const [showDropdown, setShowDropdown] = useState(false);
 
 

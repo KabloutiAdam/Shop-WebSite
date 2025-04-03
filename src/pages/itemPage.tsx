@@ -1,5 +1,5 @@
 import Header from "@/components/header/header";
-import React, { useEffect, useState, useSyncExternalStore } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SideBar from "@/components/sidebar/sidebar";
 import axios from "axios"

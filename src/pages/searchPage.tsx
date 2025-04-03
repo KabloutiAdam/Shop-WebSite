@@ -1,6 +1,6 @@
 import Header from "@/components/header/header";
-import React, { useEffect, useState, useSyncExternalStore } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import SideBar from "@/components/sidebar/sidebar";
 import axios from "axios"
 import ProductSection from "@/components/product/productSection";

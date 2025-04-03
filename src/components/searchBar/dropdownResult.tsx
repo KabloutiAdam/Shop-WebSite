@@ -1,5 +1,5 @@
-import { dropdownResultInterface, productInterface } from "@/interfaces";
-import { use, useEffect } from "react";
+import { dropdownResultInterface} from "@/interfaces";
+
 import { Link } from "react-router-dom";
 
 import PreviewCard from "../product/previewCard";
@@ -71,9 +71,7 @@ const DropdownResults: React.FC<dropdownResultInterface> = ({ filteredProducts, 
 
 
 
-    function capitalizeFirstLetter(string: string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+  
 
     return (
         <div className="w-full flex justify-center">

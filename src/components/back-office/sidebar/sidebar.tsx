@@ -1,16 +1,12 @@
-import SideBarContent from "@/components/back-office/sidebar/sidebarContent";
+
 import SideBarFooter from "@/components/sidebar/sidebarFooter";
-import SideBarGroup from "@/components/sidebar/sidebarGroup";
+
 import SideBarHeader from "@/components/sidebar/sidebarHeader";
-import SideBarItem from "@/components/sidebar/sidebarItem";
+
 import { Collapsible, CollapsibleContent } from "@radix-ui/react-collapsible";
 
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
+    
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,

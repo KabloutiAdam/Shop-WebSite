@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect } from "react";
 import { user } from "@/interfaces";
 import { useAuth } from "@/components/authProvider";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 type protectedRouteProps = PropsWithChildren & {
