@@ -28,7 +28,7 @@ const SearchPage: React.FC = () => {
         setNoResult(false)
         if (!!query) {
             try {
-              const res = await axios.get("http://localhost:3040/api/products", {
+              const res = await axios.get("/api/products", {
                 params: { query },
               });
               console.log(res.data)
