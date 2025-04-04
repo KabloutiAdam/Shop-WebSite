@@ -79,7 +79,7 @@ export default function ProductCard({ product }: { product: productInterface }) 
 
                 <div className={`h-full w-full p-4 rounded-2xl duration-100 flex flex-col justify-between items-center hover:shadow-lg ${overCard ? "hover:bg-orange-50" : ""} `}>
                     <div className="w-[80%] h-[80%] flex justify-center">
-                        <img className="w-auto object-contain" src={"../../../images/productImages/" + product.image_link} alt="" />
+                        <img className="w-auto object-contain" src={"/images/productImages/" + product.image_link} alt="" />
 
                     </div>
                     <div className="w-full mt-8 grid grid-cols-3 grid-rows-3 ">

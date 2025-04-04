@@ -146,7 +146,7 @@ export default function CartListDropdown({ isDropdownOpen }: Props) {
                                 key={`${item.id}-${index}`}
                                 className="flex justify-between items-center border-b pb-2"
                             >
-                                <img className="w-25 ml-10" src={"../../../images/productImages/" + item.image_link} alt="" />
+                                <img className="w-25 ml-10" src={"/images/productImages/" + item.image_link} alt="" />
                                 <div className="w-[50%] flex flex-col items-start">
                                     <p className="font-semibold text-gray-800">{item.name}</p>
                                     <div className="w-full flex justify-between items-center">

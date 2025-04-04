@@ -18,7 +18,7 @@ export default function MainPage() {
                 <main className="mt-10">
                     
                     <div className="w-full h-full  mb-15">
-                        <img className="w-180 justify-self-center" src="../../../images/homePageAdd.jpg" alt=""/>
+                        <img className="w-180 justify-self-center" src="/images/homePageAdd.jpg" alt=""/>
 
                     </div>
                     
