@@ -1,29 +1,32 @@
 const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
-const db = require("./db")
+const path = require("path");
+const db = require("./db"); 
+
 const app = express();
 
-// Middleware
+// Middleware global
 app.use(cors());
 app.use(express.json());
 
-
-// Routes 
-const productRoutes = require('./routes/products')
+// API routes
+const productRoutes = require("./routes/products");
 const authRoutes = require("./routes/auth");
 
+app.use("/api/products", productRoutes); 
+app.use("/api/auth", authRoutes);
 
 
-// Appel
-app.use("/products", productRoutes)
-app.use("/auth", authRoutes);
+const distPath = path.join(__dirname, "../dist");
+app.use(express.static(distPath));
 
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(distPath, "index.html"));
+});
 
-
-// Démarrer le serveur
-const PORT = 3001;
+// Lancer le serveur
+const PORT = process.env.PORT || 3040;
 app.listen(PORT, () => {
-    console.log(`Backend en ligne sur http://localhost:${PORT}`);
+  console.log(`Serveur Express prêt sur http://localhost:${PORT}`);
 });

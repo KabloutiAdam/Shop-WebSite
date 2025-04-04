@@ -25,7 +25,7 @@ const ItemPage: React.FC = () => {
     useEffect(() => {
         setLoading(true)
         setNoResult(false)
-        axios.get("http://localhost:3001/products")
+        axios.get("http://localhost:3040/api/products")
             .then(res => {
                 const allProducts = res.data;
                 const filtered = tag

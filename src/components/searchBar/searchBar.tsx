@@ -19,7 +19,7 @@ export default function SearchBar() {
     const fetchFilteredProducts = async () => {
       if (query.length > 0) {
         try {
-          const res = await axios.get("http://localhost:3001/products", {
+          const res = await axios.get("http://localhost:3040/api/products", {
             params: { query },
           });
   
