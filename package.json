@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start:prod": "npm run build && pm2 start server/index.js --mode production --name aki"
+    "start:prod": "npm run build && pm2 start server/index.js --name aki --mode production "
 
   },
   "dependencies": {
