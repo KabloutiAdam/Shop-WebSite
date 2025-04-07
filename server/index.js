@@ -19,6 +19,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
 
 if (isProduction) {
+  
   const distPath = path.join(__dirname, "../dist");
   app.use(express.static(distPath));
 
