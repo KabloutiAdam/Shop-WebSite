@@ -9,8 +9,6 @@ const isProduction = process.env.NODE_ENV === "production";
 
 app.use(express.static(path.join(__dirname, "../dist")));
 
-
-
 app.use(cors());
 app.use(express.json());
 

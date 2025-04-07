@@ -79,14 +79,14 @@ function App() {
 
 
         {/* Route par défaut lorsqu'un URL non définie est entré dans le navigateur */}
-        <Route
+        {/* <Route
           path="*"
           element={
             currentUser
               ? <Navigate to="/mainPage" />
               : <Navigate to="/login" />
           }
-        />
+        /> */}
       </Routes>
     </>
 

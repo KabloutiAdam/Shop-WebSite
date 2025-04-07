@@ -1,7 +1,16 @@
 
 
 
+export async function getUser() {
+  const storedUser = localStorage.getItem("currentUser");
 
+  if (storedUser) {
+    const user = JSON.parse(storedUser);
+    return [200, { user }] as const;
+  }
+
+  return [401, { user: null }] as const;
+}
 
 
 export async function login(email: string, password: string) {
@@ -17,7 +26,6 @@ export async function login(email: string, password: string) {
   });
 
   const data = await response.json();
-  console.log(response)
   if (!response.ok) throw new Error(data.error || "Erreur inconnue");
 
   return [response.status, data] as const;
