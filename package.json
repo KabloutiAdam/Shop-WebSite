@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start:prod": "npm run build && NODE_ENV=production"
+    "start:prod": "npm run build && pm2 start server/index.js --node_env production --name aki"
+
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.1.3",
