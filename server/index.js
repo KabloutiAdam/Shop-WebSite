@@ -4,7 +4,7 @@ const path = require("path");
 
 
 const app = express();
-const isProduction = import.meta.env.NODE_ENV === "production";
+const isProduction = import.meta.env.MODE === "production";
 
 
 app.use(express.static(path.join(__dirname, "../dist")));
