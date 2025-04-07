@@ -4,6 +4,8 @@ const path = require("path");
 
 
 const app = express();
+const isProduction = process.env.NODE_ENV === "production";
+
 
 
 app.use(cors());
@@ -16,14 +18,18 @@ const authRoutes = require("./routes/auth");
 app.use("/api/products", productRoutes); 
 app.use("/api/auth", authRoutes);
 
+if (isProduction) {
+  const distPath = path.join(__dirname, "../dist");
+  app.use(express.static(distPath));
 
-const distPath = path.join(__dirname, "../dist");
-app.use(express.static(distPath));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+}
 
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(distPath, "index.html"));
-});
+
+
 
 // Lancer le serveur
 const PORT = process.env.PORT || 3040;

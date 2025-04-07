@@ -5,20 +5,23 @@
 
 
 export async function login(email: string, password: string) {
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ login: email, password }),
-    });
+
+  const API_URL = import.meta.env.VITE_API_URL || "";
   
-    const data = await response.json();
-    console.log(response)
-    if (!response.ok) throw new Error(data.error || "Erreur inconnue");
-  
-    return [response.status, data] as const;
-  }
+  const response = await fetch(`${API_URL}/api/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ login: email, password }),
+  });
+
+  const data = await response.json();
+  console.log(response)
+  if (!response.ok) throw new Error(data.error || "Erreur inconnue");
+
+  return [response.status, data] as const;
+}
 
 
 // @ts-ignore

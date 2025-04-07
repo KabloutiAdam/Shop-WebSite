@@ -16,6 +16,9 @@ export default function SearchBar() {
 
 
   useEffect(() => {
+
+    
+
     const fetchFilteredProducts = async () => {
       if (query.length > 0) {
         try {
