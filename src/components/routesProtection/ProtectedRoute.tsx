@@ -1,7 +1,7 @@
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren } from "react";
 import { user } from "@/interfaces";
 import { useAuth } from "@/components/authProvider";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 
 type protectedRouteProps = PropsWithChildren & {
@@ -12,8 +12,8 @@ type protectedRouteProps = PropsWithChildren & {
 export default function ProtectedRoute({ allowedRoles, children }: protectedRouteProps) {
 
 
-    const { currentUser, isUserConnected, isLoading } = useAuth()
-    const navigate = useNavigate()
+    const { currentUser, isLoading } = useAuth()
+
 
 
     if (isLoading ||currentUser === undefined) {

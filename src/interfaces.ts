@@ -3,8 +3,6 @@
 export interface AuthContextType {
     token: string | null; // Un token string ou null
     isUserConnected: boolean; // Est ce que l'utilisateur est connecté
-    isLoading: boolean; // Est ce que le chargement est en cours
-    error: string | null; // Un message d'erreur ou null
     login: (token: string) => void; // Fonction pour se login avec le token comme paramètre
     logout: () => void; // Fonction pour se logout
 }

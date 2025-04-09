@@ -12,6 +12,7 @@ import {
     SidebarMenuItem,
     SidebarMenuSub,
     SidebarMenuSubItem,
+    SidebarRail,
 } from "@/components/ui/sidebar"
 import { CollapsibleTrigger } from "@/components/ui/collapsible";
 
@@ -22,84 +23,141 @@ export default function SideBar() {
 
 
     return (
-        <div className=" text-gray-800 mt-10 p-4 pt-0 h-fit flex justify-start">
+        <div className=" mt-10 p-4 pt-0 h-fit flex justify-start">
             <SideBarHeader />
 
             <SidebarMenu>
-                <Collapsible defaultOpen className="group/collapsible">
+                <Collapsible defaultOpen={false} className="group/collapsible">
                     <SidebarMenuItem>
                         <CollapsibleTrigger asChild>
                             <SidebarMenuButton>
-                                Produits {/* 🔹 Ici tu mets ton label personnalisé */}
+                                TABLEAU DE BORD
                             </SidebarMenuButton>
                         </CollapsibleTrigger>
 
                         <CollapsibleContent>
                             <SidebarMenuSub>
                                 <SidebarMenuSubItem>
-                                    Ajouter un produit {/* 🔸 Sous-menu personnalisé */}
+                                   Statistiques
                                 </SidebarMenuSubItem>
                                 <SidebarMenuSubItem>
-                                    Voir les produits
+                                    Paramètres
                                 </SidebarMenuSubItem>
                             </SidebarMenuSub>
                         </CollapsibleContent>
                     </SidebarMenuItem>
-
-                    
                 </Collapsible>
+                
 
 
-                <Collapsible defaultOpen className="group/collapsible">
+                <Collapsible defaultOpen={false} className="group/collapsible">
                     <SidebarMenuItem>
                         <CollapsibleTrigger asChild>
                             <SidebarMenuButton>
-                                Produits {/* 🔹 Ici tu mets ton label personnalisé */}
+                               PRODUIT
                             </SidebarMenuButton>
                         </CollapsibleTrigger>
 
                         <CollapsibleContent>
                             <SidebarMenuSub>
                                 <SidebarMenuSubItem>
-                                    Ajouter un produit {/* 🔸 Sous-menu personnalisé */}
+                                    Liste des produits
                                 </SidebarMenuSubItem>
                                 <SidebarMenuSubItem>
-                                    Voir les produits
+                                    Ajouter un produit
                                 </SidebarMenuSubItem>
                             </SidebarMenuSub>
                         </CollapsibleContent>
                     </SidebarMenuItem>
-
-                    
                 </Collapsible>
 
 
-                <Collapsible defaultOpen className="group/collapsible">
+                <Collapsible defaultOpen={false} className="group/collapsible">
                     <SidebarMenuItem>
                         <CollapsibleTrigger asChild>
                             <SidebarMenuButton>
-                                Produits {/* 🔹 Ici tu mets ton label personnalisé */}
+                                CATEGORIES
                             </SidebarMenuButton>
                         </CollapsibleTrigger>
 
                         <CollapsibleContent>
                             <SidebarMenuSub>
                                 <SidebarMenuSubItem>
-                                    Ajouter un produit {/* 🔸 Sous-menu personnalisé */}
+                                    Liste des catégories
                                 </SidebarMenuSubItem>
                                 <SidebarMenuSubItem>
-                                    Voir les produits
+                                    Ajouter une catégorie
                                 </SidebarMenuSubItem>
                             </SidebarMenuSub>
                         </CollapsibleContent>
                     </SidebarMenuItem>
-
-                    
                 </Collapsible>
+
+
+                <Collapsible defaultOpen={false} className="group/collapsible">
+                    <SidebarMenuItem>
+                        <CollapsibleTrigger asChild>
+                            <SidebarMenuButton>
+                               PROMOTIONS
+                            </SidebarMenuButton>
+                        </CollapsibleTrigger>
+
+                        <CollapsibleContent>
+                            <SidebarMenuSub>
+                                <SidebarMenuSubItem>
+                                    Liste des promotions
+                                </SidebarMenuSubItem>
+                                <SidebarMenuSubItem>
+                                    Ajouter une promotion
+                                </SidebarMenuSubItem>
+                            </SidebarMenuSub>
+                        </CollapsibleContent>
+                    </SidebarMenuItem>
+                </Collapsible>
+
+
+                <Collapsible defaultOpen={false} className="group/collapsible">
+                    <SidebarMenuItem>
+                        <CollapsibleTrigger asChild>
+                            <SidebarMenuButton>
+                               CUSTOMERS
+                            </SidebarMenuButton>
+                        </CollapsibleTrigger>
+
+                        <CollapsibleContent>
+                            <SidebarMenuSub>
+                                <SidebarMenuSubItem>
+                                    Liste des clients
+                                </SidebarMenuSubItem>
+                            </SidebarMenuSub>
+                        </CollapsibleContent>
+                    </SidebarMenuItem>
+                </Collapsible>
+
+                <Collapsible defaultOpen={false} className="group/collapsible">
+                    <SidebarMenuItem>
+                        <CollapsibleTrigger asChild>
+                            <SidebarMenuButton>
+                               ORDERS
+                            </SidebarMenuButton>
+                        </CollapsibleTrigger>
+
+                        <CollapsibleContent>
+                            <SidebarMenuSub>
+                                <SidebarMenuSubItem>
+                                    Liste des commandes 
+                                </SidebarMenuSubItem>
+                            </SidebarMenuSub>
+                        </CollapsibleContent>
+                    </SidebarMenuItem>
+                </Collapsible>
+
+
             </SidebarMenu>
 
 
             <SideBarFooter />
+            <SidebarRail />
 
         </div>
     )
