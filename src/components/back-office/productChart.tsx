@@ -1,7 +1,7 @@
 import { productInterface } from "@/interfaces";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Input } from "../formItems/input";
+
 
 type Props = {
     onProductSelected: (product: productInterface | null) => void;
@@ -13,7 +13,9 @@ export default function ProductChart({onProductSelected} : Props) {
 
     const [query, setQuery] = useState("q");
     const [productsList, setProductsList] = useState<productInterface[]>([]);
+    // @ts-ignore
     const [loading, setLoading] = useState(true);
+     // @ts-ignore
     const [noResult, setNoResult] = useState(false)
     const [indexSelected, setIndexSelected] = useState<number | null>(null);
 
@@ -50,6 +52,7 @@ export default function ProductChart({onProductSelected} : Props) {
 
         fetchFilteredProducts()
         setIndexSelected(null)
+        
     }, [query]);
 
     const handleInputChange = (event: any) => {
