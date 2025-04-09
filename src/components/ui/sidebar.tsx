@@ -476,7 +476,7 @@ const sidebarMenuButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+        default: "hover:bg-sidebar-accent hover:cursor-pointer hover:text-sidebar-accent-foreground",
         outline:
           "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
       },
@@ -641,7 +641,7 @@ function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
       data-slot="sidebar-menu-sub"
       data-sidebar="menu-sub"
       className={cn(
-        "ml-3.5 flex min-w-0 translate-x-px flex-col gap-1 px-2.5 py-0.5",
+        "border-black border-l-1 ml-3.5 flex min-w-0 translate-x-px flex-col gap-1 px-2.5 py-0.5",
         "group-data-[collapsible=icon]:hidden",
         className
       )}
@@ -658,7 +658,7 @@ function SidebarMenuSubItem({
     <li
       data-slot="sidebar-menu-sub-item"
       data-sidebar="menu-sub-item"
-      className={cn("group/menu-sub-item relative text-start", className)}
+      className={cn("hover:bg-sidebar-accent rounded-2xl pl-3 pr-3 hover:cursor-pointer group/menu-sub-item relative text-start", className)}
       {...props}
     />
   )
