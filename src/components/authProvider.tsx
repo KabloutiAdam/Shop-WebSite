@@ -55,13 +55,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
         }
 
-        // const storedUser = localStorage.getItem("authUser");
-        // if (storedUser) {
-        //     const parsedUser = JSON.parse(storedUser);
-        //     setCurrentUser(parsedUser);
-        //     setIsUserConnected(true);
-        // }
-
         fetchUser()
         
     }, []);

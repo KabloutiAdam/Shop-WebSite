@@ -30,12 +30,13 @@ function App() {
       window.scrollTo(0, 0);
     }, [pathname]);
 
+
     return null;
   }
 
 
   if (isLoading) {
-    return <div>ddsdsd...</div>;
+    return <div>Loading...</div>;
   }
 
 
@@ -49,7 +50,7 @@ function App() {
 
       <Routes>
         <Route path="/login" element={
-          currentUser ? <Navigate to="/mainPage" /> : <LoginPage defaultTab="login" />} />
+          currentUser !== null && currentUser !== undefined ? <Navigate to="/mainPage" /> : <LoginPage defaultTab="login" />} />
         <Route path="/register" element={<LoginPage defaultTab="register" />} />
         <Route path="/mainPage" element={
           <ProtectedRoute allowedRoles={['admin', 'user']}>
@@ -86,10 +87,11 @@ function App() {
 
 
         {/* Route par défaut lorsqu'un URL non définie est entré dans le navigateur */}
+        
         <Route
           path="*"
           element={
-            currentUser
+            currentUser !== null && currentUser !== undefined
               ? <Navigate to="/mainPage" />
               : <Navigate to="/login" />
           }
