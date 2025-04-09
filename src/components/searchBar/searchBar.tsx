@@ -10,7 +10,7 @@ export default function SearchBar() {
 
   const [query, setQuery] = useState("")
   const [filteredProducts, setFilteredProducts] = useState<productInterface[]>([]);
- 
+  
   const [showDropdown, setShowDropdown] = useState(false);
 
 

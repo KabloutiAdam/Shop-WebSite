@@ -10,6 +10,9 @@ import SearchPage from "./pages/searchPage";
 import ProtectedRoute from "./components/routesProtection/ProtectedRoute";
 import { useAuth } from "./components/authProvider";
 import DashboardMainPage from "./pages/back-office/dashboardMainPage";
+import DashboardStats from "./pages/back-office/dashboardStats";
+import DashboardSettings from "./pages/back-office/dashboardSettings";
+import DashboardProductList from "./pages/back-office/dashboardProductList";
 
 
 
@@ -46,7 +49,7 @@ function App() {
     <>
       <ScrollToTop />
 
-      
+
 
       <Routes>
         <Route path="/login" element={
@@ -80,14 +83,38 @@ function App() {
           <ProtectedRoute allowedRoles={['admin']}>
             <DashboardMainPage />
           </ProtectedRoute>
+        }>
+          
+          <Route path="statistiques" element={<DashboardStats />} />
+          <Route path="parametres" element={<DashboardSettings />} />
+          <Route path="produits" element={<DashboardProductList />} />
+          <Route path="ajouter-produit" element={<DashboardStats />} />
+          <Route path="categories" element={<DashboardStats />} />
+          <Route path="ajouter-categorie" element={<DashboardStats />} />
+          <Route path="promotions" element={<DashboardStats />} />
+          <Route path="ajouter-promotion" element={<DashboardStats />} />
+          <Route path="clients" element={<DashboardStats />} />
+          <Route path="commandes" element={<DashboardStats />} />
+         
+
+        </Route>
+
+
+
+
+        <Route path="/admin-dashboard/:page" element={
+          <ProtectedRoute allowedRoles={['admin']}>
+            <DashboardMainPage />
+          </ProtectedRoute>
         }
 
         />
 
 
 
+
         {/* Route par défaut lorsqu'un URL non définie est entré dans le navigateur */}
-        
+
         <Route
           path="*"
           element={

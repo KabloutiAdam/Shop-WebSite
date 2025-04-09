@@ -16,6 +16,9 @@ import {
     SidebarSeparator,
 } from "@/components/ui/sidebar"
 import { CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useNavigate } from "react-router-dom";
+
+
 
 
 const sideCategoriesList = [
@@ -60,11 +63,20 @@ const sideCategoriesList = [
     }
 ];
 
+
+
 export default function SideBar() {
 
+    const navigate = useNavigate()
 
+
+    function NavigateTo(path:string) {
+        navigate(path)
+    }
+
+    
     return (
-        <div className=" mt-10 p-4 pt-0 h-fit flex justify-start">
+        <div className=" mt-10 p-4 pt-0 h-fit flex justify-start ">
             <SideBarHeader />
 
             <SidebarMenu>
@@ -82,7 +94,7 @@ export default function SideBar() {
                                     <SidebarMenuSub>
                                         {category.children.map((item, index) => {
                                             return (
-                                                <SidebarMenuSubItem>
+                                                <SidebarMenuSubItem onClick={() => NavigateTo(item.path)}>
                                                     {item.name}
                                                 </SidebarMenuSubItem>
                                             )
