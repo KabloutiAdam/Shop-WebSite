@@ -16,7 +16,7 @@ import DashboardMainPage from "./pages/back-office/dashboardMainPage";
 
 function App() {
 
-  const { currentUser } = useAuth()
+  const { currentUser, isLoading } = useAuth()
 
 
   // const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -34,16 +34,23 @@ function App() {
   }
 
 
+  if (isLoading) {
+    return <div>ddsdsd...</div>;
+  }
+
 
 
 
   return (
     <>
       <ScrollToTop />
+
+      
+
       <Routes>
         <Route path="/login" element={
           currentUser ? <Navigate to="/mainPage" /> : <LoginPage defaultTab="login" />} />
-        <Route path="/register" element={<LoginPage defaultTab="register"  />} />
+        <Route path="/register" element={<LoginPage defaultTab="register" />} />
         <Route path="/mainPage" element={
           <ProtectedRoute allowedRoles={['admin', 'user']}>
             <MainPage />
@@ -73,20 +80,20 @@ function App() {
             <DashboardMainPage />
           </ProtectedRoute>
         }
-        
+
         />
 
 
 
         {/* Route par défaut lorsqu'un URL non définie est entré dans le navigateur */}
-        {/* <Route
+        <Route
           path="*"
           element={
             currentUser
               ? <Navigate to="/mainPage" />
               : <Navigate to="/login" />
           }
-        /> */}
+        />
       </Routes>
     </>
 

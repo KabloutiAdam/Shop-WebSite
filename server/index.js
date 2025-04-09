@@ -18,9 +18,8 @@ const authRoutes = require("./routes/auth");
 
 app.use("/api/products", productRoutes); 
 app.use("/api/auth", authRoutes);
-console.log("ca part")
+
 if (isProduction) {
-  console.log("Environnement de production activé")
   const distPath = path.join(__dirname, "../dist");
   app.use(express.static(distPath));
 

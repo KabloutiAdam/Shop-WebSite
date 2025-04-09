@@ -1,4 +1,4 @@
-import { login } from '@/api/auth'
+import { getUser, login } from '@/api/auth'
 import { user } from '@/interfaces';
 import {
     createContext,
@@ -11,7 +11,8 @@ import {
 type AuthContext = {
     authToken?: string | null;
     currentUser?: user | null;
-    isUserConnected: boolean
+    isUserConnected: boolean;
+    isLoading: boolean;
     handleLogin: (email: string, password: string) => Promise<"erreur" | null>;
     handleLogout: () => Promise<void>;
 };
@@ -24,17 +25,45 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     const [authToken, setAuthToken] = useState<string | null>();
     const [currentUser, setCurrentUser] = useState<user | null>();
     const [isUserConnected, setIsUserConnected] = useState<boolean>(!!authToken);
-
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     
 
     useEffect(() => {
-        const storedUser = localStorage.getItem("authUser");
-        if (storedUser) {
-            const parsedUser = JSON.parse(storedUser);
-            setCurrentUser(parsedUser);
-            setIsUserConnected(true);
+
+        async function fetchUser(){
+
+            
+            try{
+                
+                const response = await getUser()
+
+                const { authToken, user } = response[1];
+                
+                setAuthToken(authToken);
+                setCurrentUser(user);
+                setIsUserConnected(true);
+                
+            } catch{
+                setAuthToken(null);
+                setCurrentUser(null);
+                setIsUserConnected(false);
+            } finally{
+                
+                setIsLoading(false);
+            }
+
         }
+
+        // const storedUser = localStorage.getItem("authUser");
+        // if (storedUser) {
+        //     const parsedUser = JSON.parse(storedUser);
+        //     setCurrentUser(parsedUser);
+        //     setIsUserConnected(true);
+        // }
+
+        fetchUser()
+        
     }, []);
 
     async function handleLogin(email: string, password: string) {
@@ -42,7 +71,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
             const response = await login(email, password);
 
             const { authToken, user } = response[1];
-            console.log(response)
+            
             setAuthToken(authToken);
             setCurrentUser(user);
             setIsUserConnected(true)
@@ -75,6 +104,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
                 authToken,
                 currentUser,
                 isUserConnected,
+                isLoading,
                 handleLogin,
                 handleLogout,
             }}

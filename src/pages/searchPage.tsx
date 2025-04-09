@@ -31,7 +31,7 @@ const SearchPage: React.FC = () => {
               const res = await axios.get("/api/products", {
                 params: { query },
               });
-              console.log(res.data)
+              
               setProductsList(res.data);
 
             if(res.data.length == 0){

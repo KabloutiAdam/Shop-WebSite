@@ -12,15 +12,22 @@ type protectedRouteProps = PropsWithChildren & {
 export default function ProtectedRoute({ allowedRoles, children }: protectedRouteProps) {
 
 
-    const { currentUser, isUserConnected } = useAuth()
+    const { currentUser, isUserConnected, isLoading} = useAuth()
     const navigate = useNavigate()
 
     useEffect(() => {
+
+       
+
         if (currentUser === undefined && !isUserConnected) {
-            console.log("+3")
-          navigate("/login");
+          
+          
         }
-      }, [currentUser, navigate]);
+      }, [currentUser, isLoading, navigate]);
+
+      if(isLoading){
+        return <p>Loading</p>
+      }
 
     if (currentUser === undefined) {
         return <p>Loading</p>
