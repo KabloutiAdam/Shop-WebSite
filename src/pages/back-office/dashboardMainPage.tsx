@@ -1,7 +1,7 @@
 import SideBar from "@/components/back-office/sidebar/sidebar";
 import HeaderAdmin from "@/components/header/headerAdmin";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 
 
