@@ -11,7 +11,7 @@ type Props = {
 export default function ProductChart({onProductSelected} : Props) {
 
 
-    const [query, setQuery] = useState("q");
+    const [query, setQuery] = useState("");
     const [productsList, setProductsList] = useState<productInterface[]>([]);
     // @ts-ignore
     const [loading, setLoading] = useState(true);

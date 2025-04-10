@@ -15,9 +15,13 @@ app.use(express.json());
 // API routes
 const productRoutes = require("./routes/products");
 const authRoutes = require("./routes/auth");
+const brandRoute = require("./routes/brand");
+
 
 app.use("/api/products", productRoutes); 
 app.use("/api/auth", authRoutes);
+app.use("/api/brand", brandRoute);
+
 
 if (isProduction) {
   const distPath = path.join(__dirname, "../dist");

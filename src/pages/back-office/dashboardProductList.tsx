@@ -1,3 +1,4 @@
+import ModifyProductZone from "@/components/back-office/modifyProductZone";
 import ProductChart from "@/components/back-office/productChart";
 import { productInterface } from "@/interfaces";
 import { useState } from "react";
@@ -21,16 +22,11 @@ export default function DashboardProductList() {
                     <ProductChart onProductSelected={setSelectedProduct} />
                 </div>
                 <div className="flex align-center justify-center flex-col">
+
                     {selectedProduct ? (
                         <>
-                            <img
-                                className="max-w-full max-h-64 object-contain border rounded-xl"
-                                src={`../../../images/productImages/${selectedProduct.image_link}`}
-                                alt={selectedProduct.name}
-                            />
-                            <p className="mt-4 font-semibold">{selectedProduct.name}</p>
-                            <p>{selectedProduct.brand_name}</p>
-                            <p>{selectedProduct.price} CHF</p>
+                            <ModifyProductZone selectedProduct={selectedProduct} />
+
                         </>
                     ) : (
                         <p className="text-gray-400">Aucun produit sélectionné</p>
