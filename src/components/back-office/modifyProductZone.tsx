@@ -1,6 +1,7 @@
 import { productInterface } from "@/interfaces";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Button, buttonVariants } from "../formItems/button";
 
 
 
@@ -28,6 +29,10 @@ export default function ModifyProductZone({ selectedProduct }: Props) {
 
     const [isBrandDropdownDisplayed, setIsBrandDropdownDisplayed] = useState<boolean>(false);
 
+    const [brandSelected, setBrandSelected] = useState<string>(selectedProduct.brand_name)
+
+    const [productNameInput, setProductNameInput] = useState<string>(selectedProduct.name)
+    const [productPriceInput, setProductPriceInput] = useState<number>(selectedProduct.price)
 
 
 
@@ -37,11 +42,11 @@ export default function ModifyProductZone({ selectedProduct }: Props) {
             setNoResult(false)
             if (query.length > 0) {
                 try {
-                    
+
                     const res = await axios.get("/api/brand", {
                         params: { query },
                     });
-                    
+
 
                     setBrandList(res.data);
                     if (res.data.length == 0) {
@@ -55,20 +60,64 @@ export default function ModifyProductZone({ selectedProduct }: Props) {
                     setLoading(false)
                 }
             } else {
+
+
                 const res = await axios.get("/api/brand");
                 setBrandList(res.data);
                 setLoading(false)
             }
+
+
         }
 
         fetchFilteredProducts()
-        
+
 
     }, [selectedProduct, query]);
 
+
+    useEffect(() => {
+        setIsBrandDropdownDisplayed(false)
+        setIsModifying(false)
+        setBrandSelected(selectedProduct.brand_name)
+        setProductNameInput(selectedProduct.name)
+        setProductPriceInput(selectedProduct.price)
+   
+        setQuery(selectedProduct.brand_name)
+
+    }, [selectedProduct])
+
     const handleInputChange = (event: any) => {
         setQuery(event.target.value);
+        setBrandSelected(event.target.value);
+
     };
+
+    const handleNameInputChange = (event: any) => {
+        setProductNameInput(event.target.value);
+       
+    };
+
+    const handlePriceInputChange = (event: any) => {
+        setProductPriceInput(event.target.value);
+       
+    };
+
+    const updateProduct = async () =>{
+        try {
+            const res = await axios.put(`/api/products/updateProduct/${selectedProduct.id}`, {
+                name: productNameInput,   
+                price: productPriceInput,
+                brand_name: brandSelected,
+            });
+    
+        
+        } catch (error) {
+            console.error("Erreur lors de la mise à jour :", error);
+            
+        }
+
+    }
 
     return (
 
@@ -87,50 +136,84 @@ export default function ModifyProductZone({ selectedProduct }: Props) {
                 alt={selectedProduct.name}
             />
 
-            {isModifying ?
-                <>
-                    <input value={selectedProduct.name} type="text" />
-                    <input value={selectedProduct.price} type="text" />
-                    <div className="w-full relative">
-
-
+            <div className="w-full flex flex-col  items-start pl-4 mt-5">
+                {isModifying ?
+                    <>
                         <input
-                            onChange={handleInputChange}
-                            onSelect={() => setIsBrandDropdownDisplayed(true)}
-                            onBlur={() => setIsBrandDropdownDisplayed(false)}
-                            defaultValue={selectedProduct.brand_name}
-                            className="self-start w-full pl-5"
+                            className="self-start w-80 pl-5 border-black border-1 rounded-md mt-3 focus:border-blue-700 focus:ring-1 focus:ring-blue-300 outline-none transition-all duration-100"
+                            defaultValue={selectedProduct.name}
+                            onChange={handleNameInputChange}
+                            value={productNameInput}
+                            type="text"
+                            placeholder="Nom de l'article"
                         />
+                        <input
+                            className="self-start w-50 pl-5 border-black border-1 rounded-md mt-3 focus:border-blue-700 focus:ring-1 focus:ring-blue-300 outline-none transition-all duration-100"
+                            defaultValue={selectedProduct.price}
+                            onChange={handlePriceInputChange}
+                            value={productPriceInput}
+                            type="text"
+                            placeholder="Prix"
+                        />
+                        <div className="w-full relative flex">
 
-                        <div className="max-h-50 w-full text-start pl-5 bg-white overflow-y-scroll top-full absolute">
-                            {isBrandDropdownDisplayed &&
 
-                                brandList.map((brand) => {
-                                    return (
-                                        <>
+                            <input
+                                onChange={handleInputChange}
+                                onSelect={() => setIsBrandDropdownDisplayed(true)}
+                                onBlur={() => setTimeout(() => setIsBrandDropdownDisplayed(false), 100)}
+                                defaultValue={selectedProduct.brand_name}
+                                className="self-start w-50 pl-5 border-black border-1 rounded-md mt-3 focus:border-blue-700 focus:ring-1 focus:ring-blue-300 outline-none transition-all duration-100"
+                                value={brandSelected}
+                                placeholder="Marque"
 
-                                            <p>{brand.name}</p>
+                            />
 
+                            <div className="max-h-40 mt-1 w-full text-start pl-5 bg-white overflow-y-scroll top-full absolute">
+                                {isBrandDropdownDisplayed &&
 
-                                        </>
-                                    )
-                                })
-                            }
+                                    brandList.map((brand) => {
+                                        return (
+                                            <>
+                                                <div
+                                                    onClick={() => { setBrandSelected(brand.name) }}
+                                                >
+                                                    <p>
+                                                        {brand.name}
+                                                    </p>
+                                                </div>
+                                            </>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
-                    </div>
 
-                    <input type="text" />
-                </>
-                :
-                <>
-                    <p className="mt-4 font-semibold">{selectedProduct.name}</p>
-                    <p>{selectedProduct.brand_name}</p>
-                    <p>{selectedProduct.price} CHF</p>
-                </>
+
+                    </>
+                    :
+                    <>
+                        <p className="mt-3 border-white border-1 font-semibold">{selectedProduct.name}</p>
+                        <p className="mt-3 border-white border-1 font-semibold">{selectedProduct.brand_name}</p>
+                        <p className="mt-3 border-white border-1 font-semibold">{selectedProduct.price} CHF</p>
+                    </>
+
+
+                }
+            </div>
+
+            {isModifying &&
+                <div className="w-full flex justify-end mt-3">
+                    <Button
+                        className="w-50 border-1 mr-3 rounded-md mt-3 hover:cursor-pointer hover:bg-gray-700"
+                        onClick={updateProduct}
+                    >
+                        Valider les changements
+                    </Button>
+                </div>
 
 
             }
-
 
         </>
     )

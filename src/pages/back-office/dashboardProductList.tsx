@@ -21,7 +21,7 @@ export default function DashboardProductList() {
                 <div className="col-span-1">
                     <ProductChart onProductSelected={setSelectedProduct} />
                 </div>
-                <div className="flex align-center justify-center flex-col">
+                <div className="flex align-center mt-20 flex-col">
 
                     {selectedProduct ? (
                         <>
