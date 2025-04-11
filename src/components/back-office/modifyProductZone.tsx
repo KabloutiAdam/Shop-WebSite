@@ -1,7 +1,7 @@
 import { productInterface } from "@/interfaces";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, buttonVariants } from "../formItems/button";
+import { Button } from "../formItems/button";
 
 
 
@@ -105,6 +105,7 @@ export default function ModifyProductZone({ selectedProduct }: Props) {
 
     const updateProduct = async () =>{
         try {
+            // @ts-ignore
             const res = await axios.put(`/api/products/updateProduct/${selectedProduct.id}`, {
                 name: productNameInput,   
                 price: productPriceInput,
