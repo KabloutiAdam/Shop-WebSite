@@ -42,6 +42,13 @@ const sideCategoriesList = [
         ]
     },
     {
+        title: "Manufacturers",
+        children: [
+            { name: "Liste des fabricants", path: "/admin-dashboard/fabricants" },
+            { name: "Ajouter un fabricant", path: "/admin-dashboard/ajouter-fabricant" }
+        ]
+    },
+    {
         title: "PROMOTIONS",
         children: [
             { name: "Liste des promotions", path: "/admin-dashboard/promotions" },

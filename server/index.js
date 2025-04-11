@@ -16,11 +16,13 @@ app.use(express.json());
 const productRoutes = require("./routes/products");
 const authRoutes = require("./routes/auth");
 const brandRoute = require("./routes/brand");
+const warehouseRoute = require("./routes/warehouse");
 
 
 app.use("/api/products", productRoutes); 
 app.use("/api/auth", authRoutes);
 app.use("/api/brand", brandRoute);
+app.use("/api/warehouse", warehouseRoute);
 
 
 if (isProduction) {

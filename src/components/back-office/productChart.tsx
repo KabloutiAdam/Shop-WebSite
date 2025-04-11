@@ -1,6 +1,7 @@
 import { productInterface } from "@/interfaces";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import WarehouseProductDropdown from "./warehouseProductDropdwon";
 
 
 type Props = {
@@ -97,6 +98,14 @@ export default function ProductChart({ onProductSelected }: Props) {
                                 <p>{product.brand_name}</p>
                                 <p>{product.price} CHF</p>
                             </div>
+
+                            {indexSelected !==null && index === indexSelected &&
+                                <WarehouseProductDropdown 
+                                    product={product}
+                                />
+                            }  
+                            
+                            
                         </>
                     )
                 })
