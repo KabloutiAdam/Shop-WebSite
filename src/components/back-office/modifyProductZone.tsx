@@ -103,6 +103,12 @@ export default function ModifyProductZone({ selectedProduct }: Props) {
        
     };
 
+    const clickOnBrand = (event: any) => {
+        setBrandSelected(event.target.value);
+       
+    };
+
+
     const updateProduct = async () =>{
         try {
             // @ts-ignore
@@ -162,7 +168,7 @@ export default function ModifyProductZone({ selectedProduct }: Props) {
                             <input
                                 onChange={handleInputChange}
                                 onSelect={() => setIsBrandDropdownDisplayed(true)}
-                                onBlur={() => setTimeout(() => setIsBrandDropdownDisplayed(false), 100)}
+                                onBlur={() => setTimeout(() => setIsBrandDropdownDisplayed(false), 200)}
                                 defaultValue={selectedProduct.brand_name}
                                 className="self-start w-50 pl-5 border-black border-1 rounded-md mt-3 focus:border-blue-700 focus:ring-1 focus:ring-blue-300 outline-none transition-all duration-100"
                                 value={brandSelected}
