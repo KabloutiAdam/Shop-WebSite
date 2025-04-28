@@ -28,10 +28,12 @@ const sideCategoriesList = [
         ]
     },
     {
-        title: "PRODUIT",
+        title: "PRODUCTS",
         children: [
             { name: "Liste des produits", path: "/admin-dashboard/produits" },
-            { name: "Ajouter un produit", path: "/admin-dashboard/ajouter-produit" }
+            { name: "Ajouter un produit", path: "/admin-dashboard/ajouter-produit" },
+            { name: "Notifier arrivée de produit", path: "/admin-dashboard/entree-produit" }
+
         ]
     },
     {
@@ -42,7 +44,7 @@ const sideCategoriesList = [
         ]
     },
     {
-        title: "Manufacturers",
+        title: "MANUFACTURERS",
         children: [
             { name: "Liste des fabricants", path: "/admin-dashboard/fabricants" },
             { name: "Ajouter un fabricant", path: "/admin-dashboard/ajouter-fabricant" }
@@ -56,12 +58,12 @@ const sideCategoriesList = [
         ]
     },
     {
-        title: "CUSTOMER",
+        title: "CUSTOMERS",
         children: [
             { name: "Liste des client", path: "/admin-dashboard/clients" },
         ]
     }, {
-        title: "ORDER",
+        title: "ORDERS",
         children: [
             { name: "Liste des commandes", path: "/admin-dashboard/commandes" },
         ]

@@ -201,8 +201,8 @@ export default function ModifyProductZone({ selectedProduct }: Props) {
                     :
                     <>
                         <p className="mt-3 border-white border-1 font-semibold">{selectedProduct.name}</p>
-                        <p className="mt-3 border-white border-1 font-semibold">{selectedProduct.brand_name}</p>
                         <p className="mt-3 border-white border-1 font-semibold">{selectedProduct.price} CHF</p>
+                        <p className="mt-3 border-white border-1 font-semibold">{selectedProduct.brand_name}</p>
                     </>
 
 
