@@ -70,8 +70,8 @@ export default function ProductChart({ onProductSelected }: Props) {
             <div className="h-160 overflow-y-scroll bg-gray-50 dark:bg-gray-900 ">
 
 
-                <div className="font-bold text-lg h-10 items-center text-start pl-10 grid grid-rows-1 grid-cols-3 sticky top-[0px]" style={{ backgroundColor: "white" }}>
-
+                <div className="font-bold text-lg h-10 items-center text-start pl-10 grid grid-rows-1 grid-cols-4 sticky top-[0px]" style={{ backgroundColor: "white" }}>
+                    <p>Id </p>
                     <p>Nom produit</p>
                     <p>Marque produit</p>
                     <p>Prix</p>
@@ -80,7 +80,7 @@ export default function ProductChart({ onProductSelected }: Props) {
                 {productsList.map((product, index) => {
                     return (
                         <>
-                            <div className={`hover:cursor-pointer h-10 items-center text-start pl-10 grid grid-rows-1 grid-cols-3 ${index % 2 ? "bg-gray-100 dark:bg-gray-800" : "bg-gray-200 dark:bg-gray-700"} ${index === indexSelected ? "bg-orange-100 dark:bg-gray-600" : ""}`}
+                            <div className={`hover:cursor-pointer h-10 items-center text-start pl-10 grid grid-rows-1 grid-cols-4 ${index % 2 ? "bg-gray-100 dark:bg-gray-800" : "bg-gray-200 dark:bg-gray-700"} ${index === indexSelected ? "bg-orange-100 dark:bg-gray-600" : ""}`}
                                 onClick={() => {
                                     if (indexSelected === index) {
                                         setIndexSelected(null)
@@ -94,6 +94,7 @@ export default function ProductChart({ onProductSelected }: Props) {
 
                                 }}
                             >
+                                <p>{product.id}</p>
                                 <p>{product.name}</p>
                                 <p>{product.brand_name}</p>
                                 <p>{product.price} CHF</p>
