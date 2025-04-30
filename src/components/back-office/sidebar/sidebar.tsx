@@ -67,7 +67,15 @@ const sideCategoriesList = [
         children: [
             { name: "Liste des commandes", path: "/admin-dashboard/commandes" },
         ]
-    }
+    },
+    {
+        title: "WAREHOUSE",
+        children: [
+            { name: "Ajouter un dépot", path: "/admin-dashboard/depots" },
+            { name: "Modifier données d'un dépot", path: "/admin-dashboard/modifier-depot" },
+            { name: "Entrer livraison", path: "/admin-dashboard/livraison" },
+        ]
+    },
 ];
 
 

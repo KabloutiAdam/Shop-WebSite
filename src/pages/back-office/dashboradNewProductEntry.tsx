@@ -1,10 +1,11 @@
 import { productInterface } from "@/interfaces";
 import axios from "axios";
+import { Warehouse } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
 type Warehouse = {
-    id: number;
+    idWarehouse: number;
     name: string;
 };
 type Stock = {
@@ -56,7 +57,7 @@ export default function DashboardNewProductEntry() {
                     const res = await axios.get("/api/products/getProductById", {
                         params: { query }
                     });
-                    
+
                     setProductList(res.data)
                 } catch (error) {
                     console.error(error)
@@ -72,9 +73,52 @@ export default function DashboardNewProductEntry() {
         fetchProductList()
         fetchWarehouseList()
         fetchStocks()
-       
+
     }, [idProductSearch, productSelected])
 
+    useEffect(() => {
+        setQuantitiesToAdd({});
+        setNewQuantity({});
+
+    }, [productSelected])
+
+    const onSubmit = () => {
+        if (newQuantity) {
+            Object.entries(newQuantity).forEach(async element => {
+                if (element[1] > 0) {
+                    
+                    const currentQuantity = stockList.find((stock => stock.name === element[0]))?.quantity
+                    const idOfWarehouse = warehouseList.find((warehouse => warehouse.name === element[0]))?.idWarehouse
+                    if (element[1] != currentQuantity && currentQuantity) {
+                        
+
+                        await axios.put("/api/products/updateProductStock", {
+                            idProduct: productSelected?.id,
+                            idWarehouse: idOfWarehouse,
+                            quantity: element[1]
+                        })
+                           
+                    }
+                    else{
+                        await axios.put('/api/products/addProductStock', {
+                            idProduct: productSelected?.id,
+                            idWarehouse: idOfWarehouse,
+                            quantity: element[1]
+                        })
+                    }   
+                    
+
+
+                    
+
+
+                }
+
+            });
+        }
+
+       
+    }
 
     const handleInputChange = (event: any) => {
         setIdProductSearch(event.target.value);
@@ -93,57 +137,72 @@ export default function DashboardNewProductEntry() {
 
     return (
         <>
-            <div className="w-full h-[10%] flex justify-start items-center">
-                <div>
-                    <label
-                        htmlFor=""
-                        className="ml-5">Id du produit : </label>
-                    <input
-                        className="w-52 bg-[#f5e4cd] text-[#000000] text-[14px] font-bold outline-none"
-                        type="text"
-                        onChange={handleInputChange}
-                        onSelect={() => { setIsProductDropdownDisplayed(true) }}
-                        onBlur={() => setTimeout(() => setIsProductDropdownDisplayed(false), 200)}
-                    />
-                    <table className={`absolute w-250 ml-35 ${isProductDropdownDisplayed && "border-1 border-gray-500"}`} >
-                        {isProductDropdownDisplayed &&
-                            <tbody >
-                                
-                                <tr>
-                                    <MetaCell>id</MetaCell>
-                                    <MetaCell>Nom produit</MetaCell>
-                                    <MetaCell>Nom fabricant</MetaCell>
-                                    <MetaCell>Prix unitaire</MetaCell>
-                                    <MetaCell>Quantité</MetaCell>
-                                </tr>
+            <div className="w-full h-[10%] flex justify-start items-center ">
+                <div className="flex flex-row items-center">
+                    <div>
+                        <label
+                            htmlFor=""
+                            className="ml-5">Id du produit : </label>
+                        <input
+                            className="w-52 bg-[#f5e4cd] text-[#000000] text-[14px] font-bold outline-none"
+                            type="text"
+                            onChange={handleInputChange}
+                            onSelect={() => { setIsProductDropdownDisplayed(true) }}
+                            onBlur={() => setTimeout(() => setIsProductDropdownDisplayed(false), 200)}
+                        />
+                        <table className={`absolute w-250 ml-35 ${isProductDropdownDisplayed && "border-1 border-gray-500"}`} >
+                            {isProductDropdownDisplayed &&
+                                <tbody >
+
+                                    <tr>
+                                        <MetaCell>id</MetaCell>
+                                        <MetaCell>Nom produit</MetaCell>
+                                        <MetaCell>Nom fabricant</MetaCell>
+                                        <MetaCell>Prix unitaire</MetaCell>
+                                        <MetaCell>Quantité</MetaCell>
+                                    </tr>
 
 
-                                {productList.map((product, index) => {
-                                    const stock = stockList.find((stock) => stock.name === product.name);
-                                    return (
-                                        <>
-                                            <tr 
-                                                className={`border-1 border-gray-500 hover:cursor-pointer hover:bg-gray-100 ${index % 2 === 0 ? "bg-[#f5e4cd]" : "bg-white"}`} 
-                                                key={index}
-                                                onClick={() => {setProductSelected(product)}}
+                                    {productList.map((product, index) => {
+                                        const stock = stockList.find((stock) => stock.name === product.name);
+                                        return (
+                                            <>
+                                                <tr
+                                                    className={`border-1 border-gray-500 hover:cursor-pointer hover:bg-gray-100 ${index % 2 === 0 ? "bg-[#f5e4cd]" : "bg-white"}`}
+                                                    key={index}
+                                                    onClick={() => { if (product != productSelected) { setProductSelected(product) } }}
 
                                                 >
-                                                <TableCell>{product.id}</TableCell>
-                                                <TableCell>{product.name}</TableCell>
-                                                <TableCell>{product.brand_name}</TableCell>
-                                                <TableCell>{product.price}</TableCell>
-                                                <TableCell>{stock?.quantity ?? 0}</TableCell>
-                                            </tr>
+                                                    <TableCell>{product.id}</TableCell>
+                                                    <TableCell>{product.name}</TableCell>
+                                                    <TableCell>{product.brand_name}</TableCell>
+                                                    <TableCell>{product.price}</TableCell>
+                                                    <TableCell>{stock?.quantity ?? 0}</TableCell>
+                                                </tr>
 
-                                        </>
+                                            </>
 
-                                    )
-                                })
+                                        )
+                                    })
 
-                                }
-                            </tbody>
+                                    }
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+
+                    <div className="h-10 flex justify-start items-center ml-10">
+                        {productSelected &&
+                            <div className="flex flex-row">
+                                <p className="italic text-gray-500 mr-4">{productSelected.id}</p>
+                                <p className="italic text-gray-500 mr-4">{productSelected.name}</p>
+                                <p
+                                    className="text-red-600 font-bold hover:cursor-pointer"
+                                    onClick={() => { setProductSelected(undefined) }}
+                                >X</p>
+                            </div>
                         }
-                    </table>
+                    </div>
                 </div>
 
             </div>
@@ -153,58 +212,69 @@ export default function DashboardNewProductEntry() {
                 <div className="w-[90%] h-[90%] bg-[#f5e4cd] p-10 overflow-y-scroll">
 
                     <div className="w-full h-40 flex justify-start flex-col items-start">
-                        <table className="w-full">
-                            <tbody>
-                                <tr className="w-full h-10 flex  items-start">
-                                    <th className="w-[25%]">Lieu du dépôt</th>
-                                    <th className="w-[25%]">Quantité actuelle</th>
-                                    <th className="w-[25%]">Quantité à ajouter</th>
-                                    <th className="w-[25%]">Nouvelle Quantité</th>
-                                </tr>
+                        {productSelected ?
+                            <>
+                                <table className="w-full">
+                                    <tbody>
+                                        <tr className="w-full h-10 flex  items-start">
+                                            <th className="w-[25%]">Lieu du dépôt</th>
+                                            <th className="w-[25%]">Quantité actuelle</th>
+                                            <th className="w-[25%]">Quantité à ajouter</th>
+                                            <th className="w-[25%]">Nouvelle Quantité</th>
+                                        </tr>
 
-                                {warehouseList.map((warehouse) => {
-                                    const stock = stockList.find((stock) => stock.name === warehouse.name)
-                                    return (
-                                        <>
-                                            <tr className="w-full h-10 flex  items-start">
-                                                <td className="w-[25%]">{warehouse.name}</td>
-                                                <td className="w-[25%]">{stock ? stock.quantity : 0}</td>
-                                                <td className="w-[25%]">
-                                                    <input
-                                                        type="text"
-                                                        className="w-[40%] bg-white"
-                                                        value={quantitiesToAdd[warehouse.name] || 0}
-                                                        onChange={(e) => {
-                                                            const value = parseInt(e.target.value) || 0;
-                                                            setQuantitiesToAdd((prev) => ({
-                                                                ...prev,
-                                                                [warehouse.name]: value,
-                                                            }));
-                                                            setNewQuantity((prev) => ({
-                                                                ...prev,
+                                        {warehouseList.map((warehouse) => {
+                                            const stock = stockList.find((stock) => stock.name === warehouse.name)
+                                            return (
+                                                <>
+                                                    <tr className="w-full h-10 flex  items-start">
+                                                        <td className="w-[25%]">{warehouse.name}</td>
+                                                        <td className="w-[25%]">{stock ? stock.quantity : 0}</td>
+                                                        <td className="w-[25%]">
+                                                            <input
+                                                                type="text"
+                                                                className="w-[40%] bg-white"
+                                                                value={quantitiesToAdd[warehouse.name] || 0}
+                                                                onChange={(e) => {
+                                                                    const value = parseInt(e.target.value) || 0;
+                                                                    setQuantitiesToAdd((prev) => ({
+                                                                        ...prev,
+                                                                        [warehouse.name]: value,
+                                                                    }));
+                                                                    setNewQuantity((prev) => ({
+                                                                        ...prev,
 
-                                                                [warehouse.name]: (stock?.quantity ?? 0) + value,
-                                                            }))
-                                                        }} />
-                                                </td>
-                                                <td className="w-[25%]">{newQuantity[warehouse.name] || stock?.quantity || 0}</td>
+                                                                        [warehouse.name]: (stock?.quantity ?? 0) + value,
+                                                                    }))
+                                                                }} />
+                                                        </td>
+                                                        <td className="w-[25%]">{newQuantity[warehouse.name] || stock?.quantity || 0}</td>
 
-                                            </tr>
+                                                    </tr>
 
 
-                                        </>
-                                    )
-                                })
+                                                </>
+                                            )
+                                        })
 
-                                }
-                            </tbody>
-                        </table>
-                        <div className="w-full h-20 flex justify-center items-center">
-                            <button
-                                type="submit"
-                                className="bg-white text-black mb-5 font-bold py-2 px-4 rounded-2xl hover:bg-gray-200 hover:text-black hover:cursor-pointer hover:shadow-lg  "
-                            >Valider</button>
-                        </div>
+                                        }
+                                    </tbody>
+                                </table>
+                                <div className="w-full h-20 flex justify-center items-center">
+                                    <button
+                                        type="submit"
+                                        className="bg-white text-black mb-5 font-bold py-2 px-4 rounded-2xl hover:bg-gray-200 hover:text-black hover:cursor-pointer hover:shadow-lg  "
+                                        onClick={onSubmit}
+                                    >Valider</button>
+                                </div>
+                            </>
+                            :
+                            <div className="w-full flex flex-col justify-center items-center">
+                                <p>Pas de produit sélectionné </p>
+                            </div>
+
+                        }
+
 
                     </div >
 

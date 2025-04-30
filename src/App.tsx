@@ -14,6 +14,7 @@ import DashboardStats from "./pages/back-office/dashboardStats";
 import DashboardSettings from "./pages/back-office/dashboardSettings";
 import DashboardProductList from "./pages/back-office/dashboardProductList";
 import DashboardNewProductEntry from "./pages/back-office/dashboradNewProductEntry";
+import DashboardNewDelivery from "./pages/back-office/dashboardNewDelivery";
 
 
 
@@ -97,6 +98,9 @@ function App() {
           <Route path="ajouter-promotion" element={<DashboardStats />} />
           <Route path="clients" element={<DashboardStats />} />
           <Route path="commandes" element={<DashboardStats />} />
+          <Route path="depots" element={<DashboardStats />} />
+          <Route path="modifier-depot" element={<DashboardStats />} />
+          <Route path="livraison" element={<DashboardNewDelivery />} />
          
 
         </Route>

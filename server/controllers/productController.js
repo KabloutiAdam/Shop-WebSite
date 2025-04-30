@@ -125,4 +125,51 @@ exports.getProductStock = (req, res) => {
     });
 
 
+
+
+    
+
+}
+
+exports.updateProductStock = (req, res) => {
+    const productId = req.body.idProduct;
+    const quantity = req.body.quantity;
+    const warehouseId = req.body.idWarehouse;
+
+    const updateQuery = `
+        UPDATE t_warehouseStock
+        SET quantity = ?
+        WHERE productId = ? AND warehouseId = ?;
+    `;
+
+    db.run(updateQuery, [quantity, productId, warehouseId], function (err) {
+        if (err) {
+            console.error("Erreur lors de la mise à jour :", err);
+            return res.status(500).json({ error: "Erreur serveur" });
+        }
+        return res.json({ success: true, updatedId: productId });
+        
+    })
+
+}
+
+exports.addProductStock = (req, res) => {
+
+    const productId = req.body.idProduct;
+    const quantity = req.body.quantity;
+    const warehouseId = req.body.idWarehouse;
+
+    const insertQuery = `
+        INSERT INTO t_warehouseStock (productId, warehouseId, quantity)
+        VALUES (?, ?, ?);
+    `;
+
+    db.run(insertQuery, [productId, warehouseId, quantity], function (err) {
+        if (err) {
+            console.error("Erreur lors de l'insertion :", err);
+            return res.status(500).json({ error: "Erreur serveur" });
+        }
+        return res.json({ success: true, updatedId: productId });
+    })
+
 }
