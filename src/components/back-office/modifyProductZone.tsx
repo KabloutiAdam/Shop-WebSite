@@ -103,10 +103,7 @@ export default function ModifyProductZone({ selectedProduct }: Props) {
        
     };
 
-    const clickOnBrand = (event: any) => {
-        setBrandSelected(event.target.value);
-       
-    };
+    
 
 
     const updateProduct = async () =>{
