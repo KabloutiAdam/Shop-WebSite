@@ -97,7 +97,7 @@ export default function DashboardNewProductEntry() {
                             idWarehouse: idOfWarehouse,
                             quantity: element[1]
                         })
-                           
+                        
                     }
                     else{
                         await axios.put('/api/products/addProductStock', {
@@ -115,6 +115,7 @@ export default function DashboardNewProductEntry() {
                 }
 
             });
+            window.location.reload();
         }
 
        
